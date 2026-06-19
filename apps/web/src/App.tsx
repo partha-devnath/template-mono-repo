@@ -1,19 +1,28 @@
-import { Button } from "@workspace/ui/components/button"
+import { Routes, Route } from "react-router"
+import { LoginPage } from "@/routes/login"
+import { SignupPage } from "@/routes/signup"
+import { VerifyEmailPage } from "@/routes/verify-email"
+import { ForgotPasswordPage } from "@/routes/forgot-password"
+import { ResetPasswordPage } from "@/routes/reset-password"
+import { DashboardPage } from "@/routes/dashboard"
+import { ProtectedRoute, PublicRoute } from "@/components/protected-route"
 
 export function App() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="text-muted-foreground font-mono text-xs">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route element={<PublicRoute />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/verify-email" element={<VerifyEmailPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+      </Route>
+
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<DashboardPage />} />
+      </Route>
+
+      <Route path="*" element={<LoginPage />} />
+    </Routes>
   )
 }

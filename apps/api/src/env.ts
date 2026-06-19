@@ -1,0 +1,22 @@
+import { z } from "zod"
+
+const envSchema = z.object({
+  DATABASE_URL: z.string().url(),
+  CLIENT_URL: z.string().url().default("http://localhost:5173"),
+  PORT: z.coerce.number().default(3001),
+  LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace"]).default("info"),
+  BETTER_AUTH_SECRET: z.string().min(32),
+  BETTER_AUTH_URL: z.string().url(),
+  EMAIL_PROVIDER: z.enum(["console", "resend"]).default("console"),
+})
+
+export function validateEnv() {
+  const result = envSchema.safeParse(process.env)
+  if (!result.success) {
+    console.error("Invalid environment variables:", result.error.flatten().fieldErrors)
+    process.exit(1)
+  }
+  return result.data
+}
+
+export type Env = z.infer<typeof envSchema>
