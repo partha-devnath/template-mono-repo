@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "private": true,
+  "main": "./src/index.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "generate": "drizzle-kit generate",
