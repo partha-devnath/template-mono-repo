@@ -16,7 +16,7 @@ export function DashboardPage() {
           <h1 className="text-2xl font-semibold">Dashboard</h1>
           <button
             onClick={toggleSidebar}
-            className="text-muted-foreground hover:text-foreground rounded-lg border border-transparent px-2 py-1 text-xs transition-colors"
+            className="rounded-lg border border-transparent px-2 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             {sidebarOpen ? "Hide" : "Show"} sidebar
           </button>
@@ -28,19 +28,23 @@ export function DashboardPage() {
 
       <div className="mt-8 space-y-4">
         {isLoading ? (
-          <p className="text-muted-foreground text-sm">Loading user data...</p>
+          <p className="text-sm text-muted-foreground">Loading user data...</p>
         ) : (
           <>
             <div className="rounded-lg border p-4">
               <h2 className="text-sm font-medium">Session info</h2>
-              <pre className="text-muted-foreground mt-2 text-xs">
-                {JSON.stringify({ id: user?.id, name: user?.name, email: user?.email }, null, 2)}
+              <pre className="mt-2 text-xs text-muted-foreground">
+                {JSON.stringify(
+                  { id: user?.id, name: user?.name, email: user?.email },
+                  null,
+                  2
+                )}
               </pre>
             </div>
 
             <div className="rounded-lg border p-4">
               <h2 className="text-sm font-medium">API protected route</h2>
-              <pre className="text-muted-foreground mt-2 text-xs">
+              <pre className="mt-2 text-xs text-muted-foreground">
                 {JSON.stringify(userData, null, 2)}
               </pre>
             </div>

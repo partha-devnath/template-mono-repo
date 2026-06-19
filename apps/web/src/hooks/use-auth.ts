@@ -32,13 +32,15 @@ export function useAuth() {
 
   const requestReset = async (email: string) => {
     const result = await requestPasswordReset({ email })
-    if (result.error) throw new Error(result.error.message ?? "Failed to send reset email")
+    if (result.error)
+      throw new Error(result.error.message ?? "Failed to send reset email")
     return result
   }
 
   const confirmReset = async (token: string, newPassword: string) => {
     const result = await resetPassword({ newPassword, token })
-    if (result.error) throw new Error(result.error.message ?? "Password reset failed")
+    if (result.error)
+      throw new Error(result.error.message ?? "Password reset failed")
     navigate("/login")
     return result
   }

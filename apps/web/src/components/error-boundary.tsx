@@ -22,10 +22,12 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="flex min-h-svh flex-col items-center justify-center gap-4 p-6">
           <h1 className="text-2xl font-semibold">Something went wrong</h1>
-          <p className="text-muted-foreground max-w-md text-center text-sm">
+          <p className="max-w-md text-center text-sm text-muted-foreground">
             {this.state.error?.message ?? "An unexpected error occurred"}
           </p>
-          <Button onClick={() => this.setState({ hasError: false, error: null })}>
+          <Button
+            onClick={() => this.setState({ hasError: false, error: null })}
+          >
             Try again
           </Button>
         </div>

@@ -12,11 +12,15 @@
   "dependencies": {
     "@workspace/auth": "workspace:*",
     "@workspace/db": "workspace:*",
+    "@workspace/files": "workspace:*",
     "@workspace/logger": "workspace:*",
+    "@workspace/schemas": "workspace:*",
+    "drizzle-orm": "^0.43.0",
     "hono": "^4.8.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@types/bun": "^1",
     "@types/node": "^24",
     "typescript": "~6"
   }

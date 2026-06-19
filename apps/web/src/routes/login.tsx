@@ -2,7 +2,10 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { loginSchema, type LoginInput } from "@workspace/schemas/validations/auth"
+import {
+  loginSchema,
+  type LoginInput,
+} from "@workspace/schemas/validations/auth"
 import { Button } from "@workspace/ui/components/button"
 import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
@@ -32,7 +35,9 @@ export function LoginPage() {
     try {
       const result = await signIn.email(data)
       if (result.error) {
-        setError(result.error.message ?? result.error.statusText ?? "Login failed")
+        setError(
+          result.error.message ?? result.error.statusText ?? "Login failed"
+        )
         return
       }
       navigate("/dashboard")
@@ -68,7 +73,9 @@ export function LoginPage() {
                 {...form.register("email")}
               />
               {form.formState.errors.email && (
-                <p className="text-destructive text-xs">{form.formState.errors.email.message}</p>
+                <p className="text-xs text-destructive">
+                  {form.formState.errors.email.message}
+                </p>
               )}
             </div>
 
@@ -81,7 +88,9 @@ export function LoginPage() {
                 {...form.register("password")}
               />
               {form.formState.errors.password && (
-                <p className="text-destructive text-xs">{form.formState.errors.password.message}</p>
+                <p className="text-xs text-destructive">
+                  {form.formState.errors.password.message}
+                </p>
               )}
             </div>
           </CardContent>
@@ -91,10 +100,16 @@ export function LoginPage() {
               {loading ? "Signing in..." : "Sign in"}
             </Button>
             <div className="flex w-full justify-between text-sm">
-              <Link to="/signup" className="text-muted-foreground hover:text-foreground">
+              <Link
+                to="/signup"
+                className="text-muted-foreground hover:text-foreground"
+              >
                 Create account
               </Link>
-              <Link to="/forgot-password" className="text-muted-foreground hover:text-foreground">
+              <Link
+                to="/forgot-password"
+                className="text-muted-foreground hover:text-foreground"
+              >
                 Forgot password?
               </Link>
             </div>

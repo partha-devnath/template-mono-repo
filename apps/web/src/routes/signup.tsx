@@ -2,7 +2,10 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { signupSchema, type SignupInput } from "@workspace/schemas/validations/auth"
+import {
+  signupSchema,
+  type SignupInput,
+} from "@workspace/schemas/validations/auth"
 import { Button } from "@workspace/ui/components/button"
 import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
@@ -36,7 +39,9 @@ export function SignupPage() {
         password: data.password,
       })
       if (result.error) {
-        setError(result.error.message ?? result.error.statusText ?? "Signup failed")
+        setError(
+          result.error.message ?? result.error.statusText ?? "Signup failed"
+        )
         return
       }
       navigate("/verify-email")
@@ -65,9 +70,15 @@ export function SignupPage() {
 
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="John Doe" {...form.register("name")} />
+              <Input
+                id="name"
+                placeholder="John Doe"
+                {...form.register("name")}
+              />
               {form.formState.errors.name && (
-                <p className="text-destructive text-xs">{form.formState.errors.name.message}</p>
+                <p className="text-xs text-destructive">
+                  {form.formState.errors.name.message}
+                </p>
               )}
             </div>
 
@@ -80,7 +91,9 @@ export function SignupPage() {
                 {...form.register("email")}
               />
               {form.formState.errors.email && (
-                <p className="text-destructive text-xs">{form.formState.errors.email.message}</p>
+                <p className="text-xs text-destructive">
+                  {form.formState.errors.email.message}
+                </p>
               )}
             </div>
 
@@ -93,7 +106,9 @@ export function SignupPage() {
                 {...form.register("password")}
               />
               {form.formState.errors.password && (
-                <p className="text-destructive text-xs">{form.formState.errors.password.message}</p>
+                <p className="text-xs text-destructive">
+                  {form.formState.errors.password.message}
+                </p>
               )}
             </div>
 
@@ -106,7 +121,7 @@ export function SignupPage() {
                 {...form.register("confirmPassword")}
               />
               {form.formState.errors.confirmPassword && (
-                <p className="text-destructive text-xs">
+                <p className="text-xs text-destructive">
                   {form.formState.errors.confirmPassword.message}
                 </p>
               )}
@@ -117,9 +132,12 @@ export function SignupPage() {
             <Button type="submit" disabled={loading} className="w-full">
               {loading ? "Creating account..." : "Create account"}
             </Button>
-            <p className="text-muted-foreground text-center text-sm">
+            <p className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
-              <Link to="/login" className="hover:text-foreground underline underline-offset-4">
+              <Link
+                to="/login"
+                className="underline underline-offset-4 hover:text-foreground"
+              >
                 Sign in
               </Link>
             </p>

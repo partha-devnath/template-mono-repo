@@ -1,0 +1,19 @@
+{
+  "name": "@workspace/files",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@workspace/db": "workspace:*",
+    "@workspace/schemas": "workspace:*",
+    "@workspace/logger": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "^1",
+    "@types/node": "^24",
+    "typescript": "~6"
+  }
+}

@@ -53,13 +53,14 @@ export function ForgotPasswordPage() {
           <CardHeader>
             <CardTitle>Check your email</CardTitle>
             <CardDescription>
-              If an account with that email exists, we sent a password reset link.
+              If an account with that email exists, we sent a password reset
+              link.
             </CardDescription>
           </CardHeader>
           <CardFooter>
             <Link
               to="/login"
-              className="text-muted-foreground hover:text-foreground w-full text-center text-sm underline underline-offset-4"
+              className="w-full text-center text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
             >
               Back to login
             </Link>
@@ -74,7 +75,9 @@ export function ForgotPasswordPage() {
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Forgot password?</CardTitle>
-          <CardDescription>Enter your email and we'll send you a reset link</CardDescription>
+          <CardDescription>
+            Enter your email and we'll send you a reset link
+          </CardDescription>
         </CardHeader>
 
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -94,7 +97,9 @@ export function ForgotPasswordPage() {
                 {...form.register("email")}
               />
               {form.formState.errors.email && (
-                <p className="text-destructive text-xs">{form.formState.errors.email.message}</p>
+                <p className="text-xs text-destructive">
+                  {form.formState.errors.email.message}
+                </p>
               )}
             </div>
           </CardContent>
@@ -105,7 +110,7 @@ export function ForgotPasswordPage() {
             </Button>
             <Link
               to="/login"
-              className="text-muted-foreground hover:text-foreground text-center text-sm underline underline-offset-4"
+              className="text-center text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
             >
               Back to login
             </Link>

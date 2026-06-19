@@ -6,7 +6,10 @@ type RequestOptions = {
   headers?: Record<string, string>
 }
 
-export async function apiClient<T = unknown>(path: string, options: RequestOptions = {}): Promise<T> {
+export async function apiClient<T = unknown>(
+  path: string,
+  options: RequestOptions = {}
+): Promise<T> {
   const { method = "GET", body, headers = {} } = options
 
   const response = await fetch(`${API_URL}${path}`, {
@@ -22,7 +25,9 @@ export async function apiClient<T = unknown>(path: string, options: RequestOptio
   const data = await response.json()
 
   if (!response.ok) {
-    throw new Error(data.error ?? `Request failed with status ${response.status}`)
+    throw new Error(
+      data.error ?? `Request failed with status ${response.status}`
+    )
   }
 
   return data

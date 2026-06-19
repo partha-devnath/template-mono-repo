@@ -35,7 +35,10 @@ export function ResetPasswordPage() {
     setError(null)
     setLoading(true)
     try {
-      const result = await resetPassword({ newPassword: data.password, token: data.token })
+      const result = await resetPassword({
+        newPassword: data.password,
+        token: data.token,
+      })
       if (result.error) {
         setError(result.error.message ?? "Password reset failed")
         return
@@ -59,7 +62,7 @@ export function ResetPasswordPage() {
           <CardFooter>
             <Link
               to="/forgot-password"
-              className="text-muted-foreground hover:text-foreground w-full text-center text-sm underline underline-offset-4"
+              className="w-full text-center text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
             >
               Request a new link
             </Link>
@@ -94,7 +97,9 @@ export function ResetPasswordPage() {
                 {...form.register("password")}
               />
               {form.formState.errors.password && (
-                <p className="text-destructive text-xs">{form.formState.errors.password.message}</p>
+                <p className="text-xs text-destructive">
+                  {form.formState.errors.password.message}
+                </p>
               )}
             </div>
 
@@ -107,7 +112,7 @@ export function ResetPasswordPage() {
                 {...form.register("confirmPassword")}
               />
               {form.formState.errors.confirmPassword && (
-                <p className="text-destructive text-xs">
+                <p className="text-xs text-destructive">
                   {form.formState.errors.confirmPassword.message}
                 </p>
               )}
