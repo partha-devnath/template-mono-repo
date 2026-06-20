@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "type": "module",
   "private": true,
-  "main": "./src/index.ts",
+  "main": "./src/server.ts",
+  "exports": {
+    ".": "./src/server.ts",
+    "./browser": "./src/browser.ts"
+  },
   "scripts": {
     "lint": "eslint",
     "format": "prettier --write \"**/*.ts\"",

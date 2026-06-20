@@ -27,8 +27,7 @@
       "@workspace/db": ["../../packages/db/src"],
       "@workspace/auth": ["../../packages/auth/src"],
       "@workspace/email": ["../../packages/email/src"],
-      "@workspace/files": ["../../packages/files/src"],
-      "@workspace/logger": ["../../packages/logger/src"]
+      "@workspace/files": ["../../packages/files/src"]
     }
   },
   "include": ["src"]

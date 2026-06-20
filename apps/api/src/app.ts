@@ -59,9 +59,11 @@ app.use(
   "*",
   factory.createMiddleware(async (c, next) => {
     const info = getConnInfo(c)
-    c.set("requestId", crypto.randomUUID())
+    const requestId = crypto.randomUUID()
+    c.set("requestId", requestId)
+    c.header("X-Request-Id", requestId)
     logger.info(
-      { remote: info.remote, requestId: c.var.requestId },
+      { remote: info.remote, requestId },
       `${c.req.method} ${c.req.path}`
     )
     await next()

@@ -1,3 +1,6 @@
+import { createLogger } from "@workspace/logger/browser"
+
+const logger = createLogger("api-client")
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3001"
 
 type RequestOptions = {
@@ -25,9 +28,9 @@ export async function apiClient<T = unknown>(
   const data = await response.json()
 
   if (!response.ok) {
-    throw new Error(
-      data.error ?? `Request failed with status ${response.status}`
-    )
+    const errMsg = data.error ?? `Request failed with status ${response.status}`
+    logger.error({ status: response.status, path, method }, errMsg)
+    throw new Error(errMsg)
   }
 
   return data

@@ -1,5 +1,8 @@
 import { Component, type ReactNode, type ErrorInfo } from "react"
 import { Button } from "@workspace/ui/components/button"
+import { createLogger } from "@workspace/logger/browser"
+
+const logger = createLogger("error-boundary")
 
 type Props = { children: ReactNode; fallback?: ReactNode }
 type State = { hasError: boolean; error: Error | null }
@@ -12,7 +15,11 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error("ErrorBoundary caught:", error, info)
+    logger.error(error, "ErrorBoundary caught")
+    logger.error(
+      { componentStack: info.componentStack },
+      "ErrorBoundary details"
+    )
   }
 
   render() {

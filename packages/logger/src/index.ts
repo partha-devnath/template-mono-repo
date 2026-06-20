@@ -1,10 +1,2 @@
-import pino from "pino"
-
-export function createLogger(name: string) {
-  return pino({
-    name,
-    level: process.env.LOG_LEVEL ?? "info",
-  })
-}
-
-export type Logger = ReturnType<typeof createLogger>
+export { createLogger } from "./server"
+export type { Logger } from "./types"
