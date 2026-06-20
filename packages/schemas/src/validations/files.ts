@@ -24,10 +24,9 @@ export const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 export const MAX_IMAGE_SIZE = 5 * 1024 * 1024 // 5MB
 
 export const uploadFileSchema = z.object({
-  file: z.instanceof(File).refine(
-    (f) => f.size <= MAX_FILE_SIZE,
-    { message: `File size must not exceed ${MAX_FILE_SIZE / 1024 / 1024}MB` },
-  ),
+  file: z.instanceof(File).refine((f) => f.size <= MAX_FILE_SIZE, {
+    message: `File size must not exceed ${MAX_FILE_SIZE / 1024 / 1024}MB`,
+  }),
   purpose: z.enum(["avatar", "attachment", "document"]).default("attachment"),
 })
 

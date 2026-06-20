@@ -9,9 +9,7 @@ const logger = createLogger("auth")
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3001",
-  trustedOrigins: [
-    process.env.CLIENT_URL ?? "http://localhost:5173",
-  ],
+  trustedOrigins: [process.env.CLIENT_URL ?? "http://localhost:5173"],
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: {
@@ -29,21 +27,43 @@ export const auth = betterAuth({
   emailVerification: {
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
-    sendVerificationEmail: async ({ user, url }: { user: { id: string; email: string }; url: string }) => {
+    sendVerificationEmail: async ({
+      user,
+      url,
+    }: {
+      user: { id: string; email: string }
+      url: string
+    }) => {
       const clientUrl = process.env.CLIENT_URL ?? "http://localhost:5173"
       const token = new URL(url).searchParams.get("token")
-      const redirectUrl = token ? `${clientUrl}/verify-email?token=${token}` : url
+      const redirectUrl = token
+        ? `${clientUrl}/verify-email?token=${token}`
+        : url
       logger.info({ userId: user.id }, "Sending verification email")
-      await emailSender.sendVerificationEmail({ email: user.email, url: redirectUrl })
+      await emailSender.sendVerificationEmail({
+        email: user.email,
+        url: redirectUrl,
+      })
     },
   },
   resetPassword: {
-    sendResetPasswordEmail: async ({ user, url }: { user: { id: string; email: string }; url: string }) => {
+    sendResetPasswordEmail: async ({
+      user,
+      url,
+    }: {
+      user: { id: string; email: string }
+      url: string
+    }) => {
       const clientUrl = process.env.CLIENT_URL ?? "http://localhost:5173"
       const token = new URL(url).searchParams.get("token")
-      const redirectUrl = token ? `${clientUrl}/reset-password?token=${token}` : url
+      const redirectUrl = token
+        ? `${clientUrl}/reset-password?token=${token}`
+        : url
       logger.info({ userId: user.id }, "Sending reset password email")
-      await emailSender.sendResetPasswordEmail({ email: user.email, url: redirectUrl })
+      await emailSender.sendResetPasswordEmail({
+        email: user.email,
+        url: redirectUrl,
+      })
     },
   },
 })
