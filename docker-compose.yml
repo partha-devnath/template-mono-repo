@@ -15,5 +15,45 @@ services:
       timeout: 5s
       retries: 5
 
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: postgres://template:template@postgres:5432/template
+      BETTER_AUTH_SECRET: change-me-to-a-random-string-at-least-32-chars
+      BETTER_AUTH_URL: http://localhost:3001
+      CLIENT_URL: http://localhost:5173
+      PORT: "3001"
+      LOG_LEVEL: info
+      EMAIL_PROVIDER: mailpit
+      MAILPIT_HOST: mailpit
+      EMAIL_FROM: noreply@localhost
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:3001
+    depends_on:
+      - api
+    restart: unless-stopped
+
 volumes:
   pgdata:

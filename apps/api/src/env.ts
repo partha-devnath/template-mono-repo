@@ -7,7 +7,10 @@ const envSchema = z.object({
   LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace"]).default("info"),
   BETTER_AUTH_SECRET: z.string().min(32),
   BETTER_AUTH_URL: z.string().url(),
-  EMAIL_PROVIDER: z.enum(["console", "resend"]).default("console"),
+  EMAIL_PROVIDER: z.enum(["console", "mailpit", "resend"]).default("console"),
+  MAILPIT_HOST: z.string().optional(),
+  MAILPIT_SMTP_PORT: z.coerce.number().optional(),
+  EMAIL_FROM: z.string().optional(),
 })
 
 export function validateEnv() {

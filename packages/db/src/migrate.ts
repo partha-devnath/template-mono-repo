@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
 import postgres from "postgres"
 import { drizzle } from "drizzle-orm/postgres-js"
 import { migrate } from "drizzle-orm/postgres-js/migrator"
@@ -10,11 +12,18 @@ export async function runMigrations() {
     process.exit(1)
   }
 
+  const migrationsFolder = join(import.meta.dirname, "..", "migrations")
+
+  if (!existsSync(migrationsFolder)) {
+    console.log("No migrations folder found, skipping migrations")
+    return
+  }
+
   const migrateClient = postgres(connectionString, { max: 1 })
   const migrationDb = drizzle(migrateClient)
 
   try {
-    await migrate(migrationDb, { migrationsFolder: "./migrations" })
+    await migrate(migrationDb, { migrationsFolder })
     console.log("Migrations completed successfully")
   } catch (error) {
     console.error("Migration failed:", error)

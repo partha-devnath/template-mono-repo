@@ -9,6 +9,13 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@workspace/ui/": path.resolve(__dirname, "../../packages/ui/src/"),
+      "@workspace/schemas/": path.resolve(__dirname, "../../packages/schemas/src/"),
+      "@workspace/db": path.resolve(__dirname, "../../packages/db/src"),
+      "@workspace/auth": path.resolve(__dirname, "../../packages/auth/src"),
+      "@workspace/email": path.resolve(__dirname, "../../packages/email/src"),
+      "@workspace/files": path.resolve(__dirname, "../../packages/files/src"),
+      "@workspace/logger": path.resolve(__dirname, "../../packages/logger/src"),
     },
   },
 })

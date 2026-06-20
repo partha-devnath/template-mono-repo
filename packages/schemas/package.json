@@ -4,6 +4,12 @@
   "type": "module",
   "private": true,
   "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./validations/*": "./src/validations/*.ts",
+    "./db/*": "./src/db/*.ts",
+    "./types/*": "./src/types/*.ts"
+  },
   "scripts": {
     "typecheck": "tsc --noEmit"
   },

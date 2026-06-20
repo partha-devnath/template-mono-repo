@@ -45,7 +45,9 @@ Production-ready full-stack monorepo template using **Bun**, **Vite**, **React**
 │   ├── auth/             Better Auth server instance
 │   ├── email/            Email sender (console in dev, pluggable)
 │   └── logger/           Pino structured logger
-├── docker-compose.yml    PostgreSQL for local development
+├── docker-compose.yml    PostgreSQL + API + web services
+├── apps/api/Dockerfile   API multi-stage build
+├── .dockerignore
 ├── turbo.json
 └── package.json
 ```
@@ -65,7 +67,7 @@ git clone <repo-url> my-project
 cd my-project
 bun install
 
-# 2. Start PostgreSQL
+# 2. Start PostgreSQL + Mailpit
 docker compose up -d
 
 # 3. Copy environment files
@@ -76,7 +78,7 @@ cp apps/web/.env.example apps/web/.env
 # 4. Edit your .env files (especially BETTER_AUTH_SECRET)
 #    Generate a secret: bun -e "console.log(crypto.randomBytes(32).toString('hex'))"
 
-# 5. Generate & run database migrations
+# 5. Generate & run database migrations (see "Database Migrations" below)
 bun --filter @workspace/db generate
 bun --filter @workspace/db migrate
 
@@ -117,7 +119,290 @@ The template includes complete auth flows using Better Auth:
 | Protected routes | `/dashboard` | ✅ |
 | API auth middleware | `/api/protected` | ✅ |
 
-All emails (verification, password reset) log to console in development. Set `EMAIL_PROVIDER=resend` in production and implement the Resend sender in `packages/email`.
+All emails (verification, password reset) are captured by Mailpit in development. View them at http://localhost:8025. Set `EMAIL_PROVIDER=console` to log to stdout, or `EMAIL_PROVIDER=resend` for production.
+
+## Database Migrations
+
+This template uses **Drizzle ORM** + **drizzle-kit** for type-safe, code-first database migrations against PostgreSQL.
+
+### How it works
+
+1. **Define tables** in `packages/schemas/src/db/*.ts` using Drizzle's `pgTable` API.
+2. **Re-export** each new table from `packages/schemas/src/index.ts`.
+3. **Generate SQL** — drizzle-kit diffs your schema against the last snapshot and writes a `.sql` migration file.
+4. **Apply** — run the migrator, which executes all pending SQL files in order.
+
+### Creating a migration
+
+```bash
+# 1. Add or edit table definitions in packages/schemas/src/db/
+#    Example: packages/schemas/src/db/posts.ts
+
+# 2. Export the new table from packages/schemas/src/index.ts
+#    Add: export * from "./db/posts"
+
+# 3. Generate the migration SQL
+bun --filter @workspace/db generate
+#    Output: packages/db/migrations/0001_<name>.sql
+
+# 4. Review the generated SQL, then apply it
+bun --filter @workspace/db migrate
+```
+
+### Commands
+
+| Command | What it does |
+|---------|--------------|
+| `bun --filter @workspace/db generate` | Diff schema → create `migrations/000N_*.sql` + update snapshot |
+| `bun --filter @workspace/db migrate` | Apply all unapplied migrations to the database |
+| `bun --filter @workspace/db studio` | Open Drizzle Studio GUI at `https://local.drizzle.studio` |
+
+> Run from repo root, or `cd packages/db` and use `bun run generate`, `bun run migrate`, `bun run studio`.
+
+### Configuration
+
+| File | Role |
+|------|------|
+| `packages/schemas/src/db/*.ts` | Drizzle table definitions (schema source of truth) |
+| `packages/db/drizzle.config.ts` | drizzle-kit config — dialect, schema paths, output dir |
+| `packages/db/src/migrate.ts` | Migration runner — calls `drizzle-orm/migrator` |
+| `packages/db/migrations/` | Generated `.sql` files + `meta/_journal.json` + snapshots |
+| `packages/db/src/client.ts` | Runtime DB client — `drizzle(postgres(DATABASE_URL), { schema })` |
+
+### Docker
+
+PostgreSQL runs via Docker Compose (port 5432, db/user/password all set to `template`):
+
+```bash
+docker compose up -d          # start PostgreSQL
+docker compose down           # stop
+docker compose down -v        # stop + delete all data (fresh start)
+```
+
+Connection string: `postgres://template:template@localhost:5432/template`
+
+## Email Setup
+
+Email sending is abstracted behind an `EmailSender` interface in `packages/email/src/index.ts`. Better Auth calls it for email verification and password reset emails.
+
+### Mailpit (development)
+
+Set `EMAIL_PROVIDER=mailpit` (the default). Emails are captured by [Mailpit](https://mailpit.axllent.org) — an SMTP catcher with a web UI. View all sent emails at **http://localhost:8025**.
+
+Mailpit starts alongside PostgreSQL via Docker Compose. No auth or API keys needed — it accepts all SMTP traffic on port 1025.
+
+```bash
+docker compose up -d          # starts postgres + mailpit
+```
+
+To configure:
+```env
+EMAIL_PROVIDER=mailpit
+MAILPIT_HOST=localhost         # SMTP host (default: localhost)
+MAILPIT_SMTP_PORT=1025         # SMTP port (default: 1025)
+EMAIL_FROM=noreply@localhost   # From address in sent emails
+```
+
+### Console (debug)
+
+Set `EMAIL_PROVIDER=console` to log emails to stdout instead of sending:
+
+```
+[EMAIL] Verification to user@example.com: http://localhost:3001/api/auth/verify-email?token=...
+[EMAIL] Reset password to user@example.com: http://localhost:5173/reset-password?token=...
+```
+
+### Resend (production)
+
+The `createResendSender()` stub exists in `packages/email/src/index.ts`. To complete it:
+
+1. Install the Resend SDK:
+   ```bash
+   cd packages/email
+   bun add resend
+   ```
+
+2. Add your API key to `.env`:
+   ```env
+   EMAIL_PROVIDER=resend
+   RESEND_API_KEY=re_xxxxxxxxxxxx
+   ```
+
+3. Implement `createResendSender()` in `packages/email/src/index.ts`:
+   ```ts
+   import { Resend } from "resend"
+
+   function createResendSender(): EmailSender {
+     const resend = new Resend(process.env.RESEND_API_KEY)
+
+     return {
+       async sendVerificationEmail({ email, url }) {
+         await resend.emails.send({
+           from: process.env.EMAIL_FROM ?? "My App <noreply@mydomain.com>",
+           to: email,
+           subject: "Verify your email",
+           html: `<p>Click <a href="${url}">here</a> to verify your email.</p>`,
+         })
+       },
+       async sendResetPasswordEmail({ email, url }) {
+         await resend.emails.send({
+           from: process.env.EMAIL_FROM ?? "My App <noreply@mydomain.com>",
+           to: email,
+           subject: "Reset your password",
+           html: `<p>Click <a href="${url}">here</a> to reset your password.</p>`,
+         })
+       },
+     }
+   }
+   ```
+
+4. Add `RESEND_API_KEY` to `apps/api/src/env.ts` Zod schema if you want validated env vars.
+
+### Other providers
+
+Swap `Resend` for any provider (SendGrid, Postmark, SES, etc.). Implement the `EmailSender` interface — two methods: `sendVerificationEmail({ email, url })` and `sendResetPasswordEmail({ email, url })`. The `packages/auth` package will call whatever you wire in.
+
+### Environment variables for email
+
+| Variable | Values | Default | Notes |
+|----------|--------|---------|-------|
+| `EMAIL_PROVIDER` | `"console"` \| `"mailpit"` \| `"resend"` | `"mailpit"` | Selects the email sender |
+| `MAILPIT_HOST` | | `"localhost"` | SMTP host when using mailpit |
+| `MAILPIT_SMTP_PORT` | | `1025` | SMTP port when using mailpit |
+| `EMAIL_FROM` | | `"noreply@localhost"` | From address for sent emails |
+| `RESEND_API_KEY` | `re_...` | — | Required when `EMAIL_PROVIDER=resend` |
+| `BETTER_AUTH_URL` | URL | `http://localhost:3001` | Base URL used in email links |
+
+## S3 / File Storage Setup
+
+File storage is abstracted behind a `StorageProvider` interface in `packages/files/src/storage.ts`. The API layer (`apps/api`) calls `uploadFile(storage, ...)` which saves the file and records metadata in PostgreSQL.
+
+### Local filesystem (development)
+
+The default in `apps/api/src/app.ts`:
+
+```ts
+import { createLocalStorage } from "@workspace/files"
+
+const storage = createLocalStorage({
+  baseDir: "./uploads",          // files saved here on disk
+  baseUrl: "/api/files/raw",     // URL prefix for serving
+})
+```
+
+Files are written with `Bun.write()` to the `uploads/` directory. No additional configuration needed.
+
+### S3 (production)
+
+1. Install the AWS SDK:
+   ```bash
+   cd packages/files
+   bun add @aws-sdk/client-s3
+   ```
+
+2. Add S3 environment variables to `.env`:
+   ```env
+   STORAGE_PROVIDER=s3
+   S3_BUCKET=my-app-uploads
+   S3_REGION=us-east-1
+   S3_ENDPOINT=https://s3.us-east-1.amazonaws.com      # omit for standard AWS
+   S3_ACCESS_KEY_ID=AKIAxxxxxxxxxxxx
+   S3_SECRET_ACCESS_KEY=xxxxxxxxxxxx
+   S3_BASE_URL=https://cdn.mydomain.com                # CDN or public bucket URL
+   ```
+
+   > For **Cloudflare R2**, **MinIO**, or other S3-compatible services, set `S3_ENDPOINT` to their API endpoint.
+
+3. Implement `createS3Storage()` in `packages/files/src/storage.ts`:
+   ```ts
+   import { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3"
+   import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
+
+   export function createS3Storage(opts: S3Options): StorageProvider {
+     const s3 = new S3Client({
+       region: opts.region ?? "us-east-1",
+       endpoint: opts.endpoint,
+       credentials: opts.accessKeyId
+         ? { accessKeyId: opts.accessKeyId, secretAccessKey: opts.secretAccessKey! }
+         : undefined,
+     })
+
+     return {
+       async save(file, storedName) {
+         const buffer = Buffer.from(await file.arrayBuffer())
+         await s3.send(new PutObjectCommand({
+           Bucket: opts.bucket,
+           Key: storedName,
+           Body: buffer,
+           ContentType: file.type,
+         }))
+         return {
+           id: storedName,
+           storedName,
+           path: `${opts.bucket}/${storedName}`,
+           url: `${opts.baseUrl ?? ""}/${storedName}`,
+         }
+       },
+
+       async delete(storedName) {
+         await s3.send(new DeleteObjectCommand({
+           Bucket: opts.bucket,
+           Key: storedName,
+         }))
+       },
+
+       url(storedName) {
+         return `${opts.baseUrl ?? ""}/${storedName}`
+       },
+     }
+   }
+   ```
+
+4. Update `apps/api/src/app.ts` to use the S3 provider:
+   ```ts
+   import { createLocalStorage, createS3Storage } from "@workspace/files"
+
+   const storage = process.env.STORAGE_PROVIDER === "s3"
+     ? createS3Storage({
+         bucket: process.env.S3_BUCKET!,
+         region: process.env.S3_REGION,
+         endpoint: process.env.S3_ENDPOINT,
+         accessKeyId: process.env.S3_ACCESS_KEY_ID,
+         secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+         baseUrl: process.env.S3_BASE_URL,
+       })
+     : createLocalStorage({
+         baseDir: "./uploads",
+         baseUrl: "/api/files/raw",
+       })
+   ```
+
+### File upload endpoint
+
+The API exposes `POST /api/files/upload` (multipart form, requires auth). The `uploadFile()` function in `packages/files/src/upload.ts` handles:
+
+1. **Size validation** — rejects files over `maxSize` bytes.
+2. **MIME type validation** — rejects disallowed types.
+3. **Storage** — saves via the configured `StorageProvider`.
+4. **DB record** — inserts metadata into the `file` table.
+
+Predefined validation constants (in `packages/schemas/src/validations/files.ts`):
+- `MAX_FILE_SIZE` = 10 MB | `MAX_IMAGE_SIZE` = 5 MB
+- `ALLOWED_IMAGE_TYPES` — jpeg, png, webp, avif, gif
+- `ALLOWED_DOCUMENT_TYPES` — pdf, txt, csv, json
+- `ALLOWED_ALL_TYPES` — all of the above combined
+
+### Environment variables for S3
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `STORAGE_PROVIDER` | No | `"s3"` to enable S3; defaults to local filesystem |
+| `S3_BUCKET` | ✅ (for S3) | S3 bucket name |
+| `S3_REGION` | No | AWS region (default `us-east-1`) |
+| `S3_ENDPOINT` | No | S3-compatible endpoint (R2, MinIO, etc.) |
+| `S3_ACCESS_KEY_ID` | No | Access key (uses IAM role if omitted) |
+| `S3_SECRET_ACCESS_KEY` | No | Secret key (uses IAM role if omitted) |
+| `S3_BASE_URL` | No | Public base URL or CDN origin for serving files |
 
 ## Adding a new feature
 
@@ -162,15 +447,37 @@ Then add the table to `packages/schemas/src/index.ts` exports.
 
 ## Deployment
 
-### Docker
+### Docker (local)
 
-Build the API:
+The repo includes a full Docker Compose setup for local deployment:
+
 ```bash
-bun --filter api build
+# Build and start all services
+docker compose up --build
+
+# Or run in background
+docker compose up --build -d
+
+# Run migrations
+docker compose exec api bun run dist/index.js --migrate
+
+# Stop
+docker compose down
 ```
 
-Build the frontend:
+Services:
+- **web** → http://localhost:5173 (Nginx serving Vite build, proxies `/api/` to backend)
+- **api** → http://localhost:3001 (Hono/Bun, compiled with `--target bun`)
+- **postgres** → localhost:5432
+- **mailpit** → http://localhost:8025 (SMTP on 1025, web UI on 8025)
+
+### Manual build
+
 ```bash
+# API
+bun --filter api build
+
+# Frontend
 bun --filter web build
 ```
 
@@ -186,7 +493,7 @@ Serve the frontend from any static file server or use Hono's `serveStatic` in pr
 | `CLIENT_URL` | ✅ | Frontend URL (for CORS) |
 | `PORT` | | API server port (default 3001) |
 | `LOG_LEVEL` | | Pino log level (default "info") |
-| `EMAIL_PROVIDER` | | "console" or "resend" (default "console") |
+| `EMAIL_PROVIDER` | | "console" \| "mailpit" \| "resend" (default "mailpit") |
 | `VITE_API_URL` | ✅ | API URL for frontend client |
 
 ## Reference docs

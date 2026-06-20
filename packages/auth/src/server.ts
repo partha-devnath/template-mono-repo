@@ -8,6 +8,10 @@ import { createLogger } from "@workspace/logger"
 const logger = createLogger("auth")
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3001",
+  trustedOrigins: [
+    process.env.CLIENT_URL ?? "http://localhost:5173",
+  ],
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: {
