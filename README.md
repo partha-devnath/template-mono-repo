@@ -89,6 +89,7 @@ bun dev
 This starts:
 - **Frontend** → http://localhost:5173
 - **API** → http://localhost:3001
+- **Mailpit** → http://localhost:8025
 
 ### Available commands
 
@@ -104,6 +105,42 @@ bun --filter @workspace/db generate   # Generate Drizzle migrations
 bun --filter @workspace/db migrate    # Apply migrations
 bun --filter @workspace/db studio     # Open Drizzle Studio
 ```
+
+## Bootstrapping a new project
+
+To start a new project from this template:
+
+```bash
+# 1. Copy to a new folder
+cp -r template-mono-repo my-project
+cd my-project
+
+# 2. Rename the root package
+#    Edit package.json: "name": "my-project"
+
+# 3. Update the HTML title
+#    Edit apps/web/index.html: <title>my-project</title>
+
+# 4. (Optional) Change DB credentials
+#    Edit docker-compose.yml + .env + apps/api/.env:
+#      POSTGRES_USER/PASSWORD/DB and DATABASE_URL
+
+# 5. Generate a secret for auth
+bun -e "const c = require('crypto'); console.log(c.randomBytes(32).toString('hex'))"
+#    → paste this into .env as BETTER_AUTH_SECRET
+
+# 6. Reinitialize git
+rm -rf .git && git init && git add -A && git commit -m "Initial commit from template"
+
+# 7. Install, start services, apply migrations
+bun install
+docker compose up -d
+bun --filter @workspace/db generate
+bun --filter @workspace/db migrate
+bun dev
+```
+
+The **`@workspace/*` package scope** is internal only — never published to npm — so renaming it is unnecessary. It's just a monorepo convention for importing between packages.
 
 ## Auth flows
 
