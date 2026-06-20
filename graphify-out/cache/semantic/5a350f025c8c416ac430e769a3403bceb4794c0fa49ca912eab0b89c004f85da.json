@@ -1,0 +1,1 @@
+{"nodes": [{"id": "drizzle_migration_0000", "label": "Initial Drizzle Migration (0000_curious_scalphunter)", "file_type": "code", "source_file": "packages/db/migrations/meta/_journal.json", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}
