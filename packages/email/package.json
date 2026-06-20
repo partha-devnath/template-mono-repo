@@ -5,10 +5,15 @@
   "private": true,
   "main": "./src/index.ts",
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.ts\"",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "nodemailer": "^9.0.1"
+    "nodemailer": "^9.0.1",
+    "resend": "^4.6.0"
   },
   "devDependencies": {
     "@types/node": "^24",

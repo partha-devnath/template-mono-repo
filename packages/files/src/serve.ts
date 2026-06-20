@@ -1,6 +1,8 @@
 import type { StorageProvider } from "./storage"
 
-export function serveFile(storage: StorageProvider, storedName: string) {
-  const url = storage.url(storedName)
-  return fetch(url)
+export async function serveFile(
+  storage: StorageProvider,
+  storedName: string
+): Promise<Response> {
+  return storage.serve(storedName)
 }

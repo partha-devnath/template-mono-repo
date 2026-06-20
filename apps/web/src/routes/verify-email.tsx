@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSearchParams, Link, useNavigate } from "react-router"
 import { Button } from "@workspace/ui/components/button"
 import { verifyEmail } from "@/lib/auth-client"
@@ -7,18 +7,18 @@ export function VerifyEmailPage() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const token = searchParams.get("token")
+  const startedRef = useRef(false)
   const [status, setStatus] = useState<
     "idle" | "verifying" | "success" | "error"
-  >("idle")
+  >(token ? "verifying" : "idle")
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!token) {
-      setStatus("idle")
+    if (!token || startedRef.current) {
       return
     }
+    startedRef.current = true
 
-    setStatus("verifying")
     verifyEmail({ query: { token } })
       .then((result) => {
         if (result.error) {

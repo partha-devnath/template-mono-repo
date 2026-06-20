@@ -46,12 +46,34 @@ function createMailpitSender(): EmailSender {
 }
 
 function createResendSender(): EmailSender {
+  const apiKey = process.env.RESEND_API_KEY
+  const from = process.env.EMAIL_FROM ?? "noreply@localhost"
+
+  if (!apiKey) {
+    console.warn("[EMAIL] RESEND_API_KEY not set, falling back to console")
+    return consoleSender
+  }
+
   return {
-    sendVerificationEmail: async ({ email, url }) => {
-      console.log(`[RESEND] Verification to ${email}: ${url}`)
+    async sendVerificationEmail({ email, url }) {
+      const { Resend } = await import("resend")
+      const resend = new Resend(apiKey)
+      await resend.emails.send({
+        from,
+        to: email,
+        subject: "Verify your email",
+        html: `<p>Click <a href="${url}">here</a> to verify your email.</p>`,
+      })
     },
-    sendResetPasswordEmail: async ({ email, url }) => {
-      console.log(`[RESEND] Reset password to ${email}: ${url}`)
+    async sendResetPasswordEmail({ email, url }) {
+      const { Resend } = await import("resend")
+      const resend = new Resend(apiKey)
+      await resend.emails.send({
+        from,
+        to: email,
+        subject: "Reset your password",
+        html: `<p>Click <a href="${url}">here</a> to reset your password.</p>`,
+      })
     },
   }
 }

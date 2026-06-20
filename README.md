@@ -4,19 +4,19 @@ Production-ready full-stack monorepo template using **Bun**, **Vite**, **React**
 
 ## Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Runtime | [Bun](https://bun.sh) |
-| Frontend | [Vite](https://vite.dev) + [React 19](https://react.dev) + [shadcn/ui](https://ui.shadcn.com) |
-| Backend | [Hono](https://hono.dev) |
-| Auth | [Better Auth](https://better-auth.com) — email/password, email verification, password reset |
-| Database | [PostgreSQL](https://postgresql.org) + [Drizzle ORM](https://orm.drizzle.team) |
-| Forms | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) |
-| Data Fetching | [TanStack React Query](https://tanstack.com/query) |
-| State | [Zustand](https://zustand-demo.pmnd.rs) |
-| Logging | [Pino](https://getpino.io) |
-| Monorepo | [Turborepo](https://turbo.build/repo) |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com) |
+| Layer         | Technology                                                                                    |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| Runtime       | [Bun](https://bun.sh)                                                                         |
+| Frontend      | [Vite](https://vite.dev) + [React 19](https://react.dev) + [shadcn/ui](https://ui.shadcn.com) |
+| Backend       | [Hono](https://hono.dev)                                                                      |
+| Auth          | [Better Auth](https://better-auth.com) — email/password, email verification, password reset   |
+| Database      | [PostgreSQL](https://postgresql.org) + [Drizzle ORM](https://orm.drizzle.team)                |
+| Forms         | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev)                       |
+| Data Fetching | [TanStack React Query](https://tanstack.com/query)                                            |
+| State         | [Zustand](https://zustand-demo.pmnd.rs)                                                       |
+| Logging       | [Pino](https://getpino.io)                                                                    |
+| Monorepo      | [Turborepo](https://turbo.build/repo)                                                         |
+| Styling       | [Tailwind CSS v4](https://tailwindcss.com)                                                    |
 
 ## Project structure
 
@@ -87,6 +87,7 @@ bun dev
 ```
 
 This starts:
+
 - **Frontend** → http://localhost:5173
 - **API** → http://localhost:3001
 - **Mailpit** → http://localhost:8025
@@ -146,15 +147,15 @@ The **`@workspace/*` package scope** is internal only — never published to npm
 
 The template includes complete auth flows using Better Auth:
 
-| Flow | Route | Status |
-|------|-------|--------|
-| Sign up | `/signup` | ✅ |
-| Email verification | `/verify-email?token=...` | ✅ |
-| Sign in | `/login` | ✅ |
-| Forgot password | `/forgot-password` | ✅ |
-| Reset password | `/reset-password?token=...` | ✅ |
-| Protected routes | `/dashboard` | ✅ |
-| API auth middleware | `/api/protected` | ✅ |
+| Flow                | Route                       | Status |
+| ------------------- | --------------------------- | ------ |
+| Sign up             | `/signup`                   | ✅     |
+| Email verification  | `/verify-email?token=...`   | ✅     |
+| Sign in             | `/login`                    | ✅     |
+| Forgot password     | `/forgot-password`          | ✅     |
+| Reset password      | `/reset-password?token=...` | ✅     |
+| Protected routes    | `/dashboard`                | ✅     |
+| API auth middleware | `/api/protected`            | ✅     |
 
 All emails (verification, password reset) are captured by Mailpit in development. View them at http://localhost:8025. Set `EMAIL_PROVIDER=console` to log to stdout, or `EMAIL_PROVIDER=resend` for production.
 
@@ -188,23 +189,23 @@ bun --filter @workspace/db migrate
 
 ### Commands
 
-| Command | What it does |
-|---------|--------------|
+| Command                               | What it does                                                   |
+| ------------------------------------- | -------------------------------------------------------------- |
 | `bun --filter @workspace/db generate` | Diff schema → create `migrations/000N_*.sql` + update snapshot |
-| `bun --filter @workspace/db migrate` | Apply all unapplied migrations to the database |
-| `bun --filter @workspace/db studio` | Open Drizzle Studio GUI at `https://local.drizzle.studio` |
+| `bun --filter @workspace/db migrate`  | Apply all unapplied migrations to the database                 |
+| `bun --filter @workspace/db studio`   | Open Drizzle Studio GUI at `https://local.drizzle.studio`      |
 
 > Run from repo root, or `cd packages/db` and use `bun run generate`, `bun run migrate`, `bun run studio`.
 
 ### Configuration
 
-| File | Role |
-|------|------|
-| `packages/schemas/src/db/*.ts` | Drizzle table definitions (schema source of truth) |
-| `packages/db/drizzle.config.ts` | drizzle-kit config — dialect, schema paths, output dir |
-| `packages/db/src/migrate.ts` | Migration runner — calls `drizzle-orm/migrator` |
-| `packages/db/migrations/` | Generated `.sql` files + `meta/_journal.json` + snapshots |
-| `packages/db/src/client.ts` | Runtime DB client — `drizzle(postgres(DATABASE_URL), { schema })` |
+| File                            | Role                                                              |
+| ------------------------------- | ----------------------------------------------------------------- |
+| `packages/schemas/src/db/*.ts`  | Drizzle table definitions (schema source of truth)                |
+| `packages/db/drizzle.config.ts` | drizzle-kit config — dialect, schema paths, output dir            |
+| `packages/db/src/migrate.ts`    | Migration runner — calls `drizzle-orm/migrator`                   |
+| `packages/db/migrations/`       | Generated `.sql` files + `meta/_journal.json` + snapshots         |
+| `packages/db/src/client.ts`     | Runtime DB client — `drizzle(postgres(DATABASE_URL), { schema })` |
 
 ### Docker
 
@@ -233,6 +234,7 @@ docker compose up -d          # starts postgres + mailpit
 ```
 
 To configure:
+
 ```env
 EMAIL_PROVIDER=mailpit
 MAILPIT_HOST=localhost         # SMTP host (default: localhost)
@@ -254,18 +256,21 @@ Set `EMAIL_PROVIDER=console` to log emails to stdout instead of sending:
 The `createResendSender()` stub exists in `packages/email/src/index.ts`. To complete it:
 
 1. Install the Resend SDK:
+
    ```bash
    cd packages/email
    bun add resend
    ```
 
 2. Add your API key to `.env`:
+
    ```env
    EMAIL_PROVIDER=resend
    RESEND_API_KEY=re_xxxxxxxxxxxx
    ```
 
 3. Implement `createResendSender()` in `packages/email/src/index.ts`:
+
    ```ts
    import { Resend } from "resend"
 
@@ -301,118 +306,52 @@ Swap `Resend` for any provider (SendGrid, Postmark, SES, etc.). Implement the `E
 
 ### Environment variables for email
 
-| Variable | Values | Default | Notes |
-|----------|--------|---------|-------|
-| `EMAIL_PROVIDER` | `"console"` \| `"mailpit"` \| `"resend"` | `"mailpit"` | Selects the email sender |
-| `MAILPIT_HOST` | | `"localhost"` | SMTP host when using mailpit |
-| `MAILPIT_SMTP_PORT` | | `1025` | SMTP port when using mailpit |
-| `EMAIL_FROM` | | `"noreply@localhost"` | From address for sent emails |
-| `RESEND_API_KEY` | `re_...` | — | Required when `EMAIL_PROVIDER=resend` |
-| `BETTER_AUTH_URL` | URL | `http://localhost:3001` | Base URL used in email links |
+| Variable            | Values                                   | Default                 | Notes                                 |
+| ------------------- | ---------------------------------------- | ----------------------- | ------------------------------------- |
+| `EMAIL_PROVIDER`    | `"console"` \| `"mailpit"` \| `"resend"` | `"mailpit"`             | Selects the email sender              |
+| `MAILPIT_HOST`      |                                          | `"localhost"`           | SMTP host when using mailpit          |
+| `MAILPIT_SMTP_PORT` |                                          | `1025`                  | SMTP port when using mailpit          |
+| `EMAIL_FROM`        |                                          | `"noreply@localhost"`   | From address for sent emails          |
+| `RESEND_API_KEY`    | `re_...`                                 | —                       | Required when `EMAIL_PROVIDER=resend` |
+| `BETTER_AUTH_URL`   | URL                                      | `http://localhost:3001` | Base URL used in email links          |
 
 ## S3 / File Storage Setup
 
-File storage is abstracted behind a `StorageProvider` interface in `packages/files/src/storage.ts`. The API layer (`apps/api`) calls `uploadFile(storage, ...)` which saves the file and records metadata in PostgreSQL.
+File storage uses an S3-compatible adapter (`packages/files/src/storage.ts`). The API proxies file uploads and serves files through MinIO (local dev) or any S3-compatible provider (AWS S3, GCS, Cloudflare R2) in production.
 
-### Local filesystem (development)
+### MinIO (development)
 
-The default in `apps/api/src/app.ts`:
+MinIO is included in `docker-compose.yml`. It auto-creates the `template` bucket on startup.
 
-```ts
-import { createLocalStorage } from "@workspace/files"
-
-const storage = createLocalStorage({
-  baseDir: "./uploads",          // files saved here on disk
-  baseUrl: "/api/files/raw",     // URL prefix for serving
-})
+```env
+S3_ENDPOINT=http://localhost:9000
+S3_REGION=us-east-1
+S3_ACCESS_KEY_ID=minioadmin
+S3_SECRET_ACCESS_KEY=minioadmin
+S3_BUCKET=template
+# S3_BASE_URL=          # optional CDN/public URL
 ```
 
-Files are written with `Bun.write()` to the `uploads/` directory. No additional configuration needed.
+Run `docker compose up minio minio-init` to start MinIO. The console is available at http://localhost:9001.
 
-### S3 (production)
+### AWS S3 / GCS / R2 (production)
 
-1. Install the AWS SDK:
-   ```bash
-   cd packages/files
-   bun add @aws-sdk/client-s3
-   ```
+Change the env vars to your provider's credentials:
 
-2. Add S3 environment variables to `.env`:
-   ```env
-   STORAGE_PROVIDER=s3
-   S3_BUCKET=my-app-uploads
-   S3_REGION=us-east-1
-   S3_ENDPOINT=https://s3.us-east-1.amazonaws.com      # omit for standard AWS
-   S3_ACCESS_KEY_ID=AKIAxxxxxxxxxxxx
-   S3_SECRET_ACCESS_KEY=xxxxxxxxxxxx
-   S3_BASE_URL=https://cdn.mydomain.com                # CDN or public bucket URL
-   ```
+```env
+S3_ENDPOINT=https://s3.us-east-1.amazonaws.com   # omit for standard AWS
+S3_REGION=us-east-1
+S3_ACCESS_KEY_ID=AKIAxxxxxxxxxxxx
+S3_SECRET_ACCESS_KEY=xxxxxxxxxxxx
+S3_BUCKET=my-app-uploads
+S3_BASE_URL=https://cdn.mydomain.com             # optional CDN URL
+```
 
-   > For **Cloudflare R2**, **MinIO**, or other S3-compatible services, set `S3_ENDPOINT` to their API endpoint.
+The same `createS3Storage` adapter works with any S3-compatible provider. Set `S3_ENDPOINT` to the provider's API endpoint.
 
-3. Implement `createS3Storage()` in `packages/files/src/storage.ts`:
-   ```ts
-   import { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3"
-   import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
+### Custom storage adapters
 
-   export function createS3Storage(opts: S3Options): StorageProvider {
-     const s3 = new S3Client({
-       region: opts.region ?? "us-east-1",
-       endpoint: opts.endpoint,
-       credentials: opts.accessKeyId
-         ? { accessKeyId: opts.accessKeyId, secretAccessKey: opts.secretAccessKey! }
-         : undefined,
-     })
-
-     return {
-       async save(file, storedName) {
-         const buffer = Buffer.from(await file.arrayBuffer())
-         await s3.send(new PutObjectCommand({
-           Bucket: opts.bucket,
-           Key: storedName,
-           Body: buffer,
-           ContentType: file.type,
-         }))
-         return {
-           id: storedName,
-           storedName,
-           path: `${opts.bucket}/${storedName}`,
-           url: `${opts.baseUrl ?? ""}/${storedName}`,
-         }
-       },
-
-       async delete(storedName) {
-         await s3.send(new DeleteObjectCommand({
-           Bucket: opts.bucket,
-           Key: storedName,
-         }))
-       },
-
-       url(storedName) {
-         return `${opts.baseUrl ?? ""}/${storedName}`
-       },
-     }
-   }
-   ```
-
-4. Update `apps/api/src/app.ts` to use the S3 provider:
-   ```ts
-   import { createLocalStorage, createS3Storage } from "@workspace/files"
-
-   const storage = process.env.STORAGE_PROVIDER === "s3"
-     ? createS3Storage({
-         bucket: process.env.S3_BUCKET!,
-         region: process.env.S3_REGION,
-         endpoint: process.env.S3_ENDPOINT,
-         accessKeyId: process.env.S3_ACCESS_KEY_ID,
-         secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-         baseUrl: process.env.S3_BASE_URL,
-       })
-     : createLocalStorage({
-         baseDir: "./uploads",
-         baseUrl: "/api/files/raw",
-       })
-   ```
+See `packages/files/README.md` for the `StorageProvider` interface and instructions for implementing custom adapters (GCS, Azure Blob, etc.).
 
 ### File upload endpoint
 
@@ -424,6 +363,7 @@ The API exposes `POST /api/files/upload` (multipart form, requires auth). The `u
 4. **DB record** — inserts metadata into the `file` table.
 
 Predefined validation constants (in `packages/schemas/src/validations/files.ts`):
+
 - `MAX_FILE_SIZE` = 10 MB | `MAX_IMAGE_SIZE` = 5 MB
 - `ALLOWED_IMAGE_TYPES` — jpeg, png, webp, avif, gif
 - `ALLOWED_DOCUMENT_TYPES` — pdf, txt, csv, json
@@ -431,15 +371,14 @@ Predefined validation constants (in `packages/schemas/src/validations/files.ts`)
 
 ### Environment variables for S3
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `STORAGE_PROVIDER` | No | `"s3"` to enable S3; defaults to local filesystem |
-| `S3_BUCKET` | ✅ (for S3) | S3 bucket name |
-| `S3_REGION` | No | AWS region (default `us-east-1`) |
-| `S3_ENDPOINT` | No | S3-compatible endpoint (R2, MinIO, etc.) |
-| `S3_ACCESS_KEY_ID` | No | Access key (uses IAM role if omitted) |
-| `S3_SECRET_ACCESS_KEY` | No | Secret key (uses IAM role if omitted) |
-| `S3_BASE_URL` | No | Public base URL or CDN origin for serving files |
+| Variable               | Required | Description                                     |
+| ---------------------- | -------- | ----------------------------------------------- |
+| `S3_BUCKET`            | No       | S3 bucket name (default: `template`)            |
+| `S3_REGION`            | No       | AWS region (default `us-east-1`)                |
+| `S3_ENDPOINT`          | No       | S3-compatible endpoint (MinIO, R2, GCS, etc.)   |
+| `S3_ACCESS_KEY_ID`     | No       | Access key (uses IAM role if omitted)           |
+| `S3_SECRET_ACCESS_KEY` | No       | Secret key (uses IAM role if omitted)           |
+| `S3_BASE_URL`          | No       | Public base URL or CDN origin for serving files |
 
 ## Adding a new feature
 
@@ -503,6 +442,7 @@ docker compose down
 ```
 
 Services:
+
 - **web** → http://localhost:5173 (Nginx serving Vite build, proxies `/api/` to backend)
 - **api** → http://localhost:3001 (Hono/Bun, compiled with `--target bun`)
 - **postgres** → localhost:5432
@@ -522,20 +462,21 @@ Serve the frontend from any static file server or use Hono's `serveStatic` in pr
 
 ### Environment variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `DATABASE_URL` | ✅ | PostgreSQL connection string |
-| `BETTER_AUTH_SECRET` | ✅ | 32+ char random string |
-| `BETTER_AUTH_URL` | ✅ | Public URL of API server |
-| `CLIENT_URL` | ✅ | Frontend URL (for CORS) |
-| `PORT` | | API server port (default 3001) |
-| `LOG_LEVEL` | | Pino log level (default "info") |
-| `EMAIL_PROVIDER` | | "console" \| "mailpit" \| "resend" (default "mailpit") |
-| `VITE_API_URL` | ✅ | API URL for frontend client |
+| Variable             | Required | Description                                            |
+| -------------------- | -------- | ------------------------------------------------------ |
+| `DATABASE_URL`       | ✅       | PostgreSQL connection string                           |
+| `BETTER_AUTH_SECRET` | ✅       | 32+ char random string                                 |
+| `BETTER_AUTH_URL`    | ✅       | Public URL of API server                               |
+| `CLIENT_URL`         | ✅       | Frontend URL (for CORS)                                |
+| `PORT`               |          | API server port (default 3001)                         |
+| `LOG_LEVEL`          |          | Pino log level (default "info")                        |
+| `EMAIL_PROVIDER`     |          | "console" \| "mailpit" \| "resend" (default "mailpit") |
+| `VITE_API_URL`       | ✅       | API URL for frontend client                            |
 
 ## Reference docs
 
 ### Hono
+
 - [Getting started with Bun](https://hono.dev/docs/getting-started/bun)
 - [Factory helper](https://hono.dev/docs/helpers/factory) — typed middleware and app creation
 - [Adapter helper](https://hono.dev/docs/helpers/adapter) — cross-runtime env + runtime detection
@@ -544,6 +485,7 @@ Serve the frontend from any static file server or use Hono's `serveStatic` in pr
 - [CORS middleware](https://hono.dev/docs/middleware/builtin/cors)
 
 ### Better Auth
+
 - [Installation](https://better-auth.com/docs/installation)
 - [Basic usage](https://better-auth.com/docs/basic-usage) — sign in, sign up, session
 - [Drizzle adapter](https://better-auth.com/docs/adapters/drizzle)
@@ -553,6 +495,7 @@ Serve the frontend from any static file server or use Hono's `serveStatic` in pr
 - [Optimizing for performance](https://better-auth.com/docs/guides/optimizing-for-performance)
 
 ### Drizzle ORM
+
 - [Overview](https://orm.drizzle.team/docs/overview)
 - [PostgreSQL dialect](https://orm.drizzle.team/docs/get-started-postgresql)
 - [Schema definitions](https://orm.drizzle.team/docs/schemas)
@@ -560,6 +503,7 @@ Serve the frontend from any static file server or use Hono's `serveStatic` in pr
 - [Drizzle Kit CLI](https://orm.drizzle.team/kit-docs/overview)
 
 ### Frontend
+
 - [Vite](https://vite.dev/guide/)
 - [React 19](https://react.dev/reference/react)
 - [React Router](https://reactrouter.com/home)
@@ -571,6 +515,7 @@ Serve the frontend from any static file server or use Hono's `serveStatic` in pr
 - [Tailwind CSS v4](https://tailwindcss.com/docs)
 
 ### Runtime & tooling
+
 - [Bun](https://bun.sh/docs)
 - [Turborepo](https://turbo.build/repo/docs)
 - [Pino](https://getpino.io/#/docs)

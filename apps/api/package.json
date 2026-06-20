@@ -5,9 +5,13 @@
   "private": true,
   "scripts": {
     "dev": "bun --watch src/index.ts",
-    "build": "bun run ../../scripts/postinstall.mjs && tsc && bun build src/index.ts --outdir dist --target node",
+    "build": "tsc --noEmit && bun build src/index.ts --outdir dist --target bun",
     "start": "bun run dist/index.js",
-    "typecheck": "tsc --noEmit"
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.ts\"",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
   },
   "dependencies": {
     "@workspace/auth": "workspace:*",

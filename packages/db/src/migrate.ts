@@ -33,4 +33,8 @@ export async function runMigrations() {
   }
 }
 
-await runMigrations()
+const isDirectRun = import.meta.filename === process.argv[1]
+
+if (isDirectRun) {
+  await runMigrations()
+}

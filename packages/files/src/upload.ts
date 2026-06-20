@@ -23,18 +23,30 @@ export type UploadOptions = {
   purpose?: string
 }
 
+const SAFE_EXT_RE = /^[a-zA-Z0-9]+$/
+
 export async function uploadFile(opts: UploadOptions): Promise<UploadResult> {
-  const { storage, userId, file, allowedMimeTypes, maxSize, purpose } = opts
+  const { storage, userId, file, allowedMimeTypes, maxSize } = opts
 
   if (maxSize && file.size > maxSize) {
     throw new Error(`File size ${file.size} exceeds limit of ${maxSize}`)
   }
 
-  if (allowedMimeTypes && allowedMimeTypes.length > 0 && !allowedMimeTypes.includes(file.type)) {
-    throw new Error(`File type "${file.type}" is not allowed. Allowed: ${allowedMimeTypes.join(", ")}`)
+  if (
+    allowedMimeTypes &&
+    allowedMimeTypes.length > 0 &&
+    !allowedMimeTypes.includes(file.type)
+  ) {
+    throw new Error(
+      `File type "${file.type}" is not allowed. Allowed: ${allowedMimeTypes.join(", ")}`
+    )
   }
 
   const ext = file.name.split(".").pop() ?? "bin"
+  if (!SAFE_EXT_RE.test(ext)) {
+    throw new Error(`Unsafe file extension: ${ext}`)
+  }
+
   const storedName = `${generateId()}.${ext}`
   const stored = await storage.save(file, storedName)
 
