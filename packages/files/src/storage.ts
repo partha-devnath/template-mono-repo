@@ -45,6 +45,68 @@ type S3Options = {
   baseUrl?: string
 }
 
-export function createS3Storage(_opts: S3Options): StorageProvider {
-  throw new Error("S3 storage not implemented. Install @aws-sdk/client-s3 and implement save/delete/url.")
+export function createS3Storage(opts: S3Options): StorageProvider {
+  const {
+    bucket,
+    endpoint,
+    region = "us-east-1",
+    accessKeyId,
+    secretAccessKey,
+    baseUrl,
+  } = opts
+
+  const clientInit: {
+    region: string
+    endpoint?: string
+    credentials?: { accessKeyId: string; secretAccessKey: string }
+    forcePathStyle?: boolean
+  } = {
+    region,
+    forcePathStyle: true,
+  }
+
+  if (endpoint) {
+    clientInit.endpoint = endpoint
+  }
+
+  if (accessKeyId && secretAccessKey) {
+    clientInit.credentials = { accessKeyId, secretAccessKey }
+  }
+
+  return {
+    async save(file, storedName) {
+      const { PutObjectCommand, S3Client } = await import("@aws-sdk/client-s3")
+      const s3 = new S3Client(clientInit)
+      const body = file instanceof Blob ? new Uint8Array(await file.arrayBuffer()) : file
+      const mimeType = file.type || "application/octet-stream"
+
+      await s3.send(
+        new PutObjectCommand({
+          Bucket: bucket,
+          Key: storedName,
+          Body: body,
+          ContentType: mimeType,
+        }),
+      )
+
+      const url = baseUrl
+        ? `${baseUrl.replace(/\/$/, "")}/${storedName}`
+        : `${endpoint ?? ""}/${bucket}/${storedName}`
+
+      return { id: storedName, storedName, path: storedName, url }
+    },
+
+    async delete(storedName) {
+      const { DeleteObjectCommand, S3Client } = await import("@aws-sdk/client-s3")
+      const s3 = new S3Client(clientInit)
+      await s3.send(new DeleteObjectCommand({ Bucket: bucket, Key: storedName }))
+    },
+
+    url(storedName) {
+      if (baseUrl) {
+        return `${baseUrl.replace(/\/$/, "")}/${storedName}`
+      }
+      return `${endpoint ?? ""}/${bucket}/${storedName}`
+    },
+  }
 }
