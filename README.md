@@ -49,6 +49,7 @@ Production-ready full-stack monorepo template using **Bun**, **Vite**, **React**
 │   └── files/            S3-compatible storage adapter + upload helper
 ├── docker-compose.yml    PostgreSQL + API + web + MinIO services
 ├── apps/api/Dockerfile   API multi-stage build
+├── infra/terraform/      AWS infrastructure (ECR, EKS, ALB)
 ├── .dockerignore
 ├── turbo.json
 └── package.json
@@ -449,6 +450,26 @@ Services:
 - **api** → http://localhost:3001 (Hono/Bun, compiled with `--target bun`)
 - **postgres** → localhost:5432
 - **mailpit** → http://localhost:8025 (SMTP on 1025, web UI on 8025)
+
+### AWS (EKS)
+
+Production infrastructure is provisioned with Terraform in `infra/terraform/`:
+
+```bash
+cd infra/terraform/environments/dev
+terraform init
+terraform plan
+terraform apply
+```
+
+The Terraform modules create:
+
+- **ECR** repositories for `api` and `web` container images.
+- **VPC** with public and private subnets across three AZs.
+- **EKS** cluster with managed node groups.
+- **Application Gateway (ALB)** with path-based routing (`/api/*` → API, `/*` → web).
+
+See `infra/terraform/README.md` for details and required variables.
 
 ### Manual build
 
