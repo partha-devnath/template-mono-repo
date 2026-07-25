@@ -58,14 +58,16 @@ app.use("*", async (c, next) => {
 app.use(
   "*",
   factory.createMiddleware(async (c, next) => {
-    const info = getConnInfo(c)
+    let remote: { address?: string; addressType?: string; port?: number } = {}
+    try {
+      remote = getConnInfo(c).remote
+    } catch {
+      remote = { address: "127.0.0.1" }
+    }
     const requestId = crypto.randomUUID()
     c.set("requestId", requestId)
     c.header("X-Request-Id", requestId)
-    logger.info(
-      { remote: info.remote, requestId },
-      `${c.req.method} ${c.req.path}`
-    )
+    logger.info({ remote, requestId }, `${c.req.method} ${c.req.path}`)
     await next()
   })
 )

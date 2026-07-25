@@ -1,4 +1,12 @@
-import { describe, it, expect } from "bun:test"
+import { describe, it, expect, beforeAll } from "bun:test"
+
+beforeAll(() => {
+  process.env.DATABASE_URL =
+    "postgres://template:template@localhost:5432/template"
+  process.env.BETTER_AUTH_SECRET = "test-secret-at-least-32-characters-long!!"
+  process.env.BETTER_AUTH_URL = "http://localhost:3001/api/auth"
+  process.env.CLIENT_URL = "http://localhost:5173"
+})
 
 describe("app", () => {
   it("health endpoint returns ok", async () => {
