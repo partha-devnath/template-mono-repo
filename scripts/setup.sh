@@ -64,8 +64,8 @@ ok "Dependencies installed"
 # ── Docker services ─────────────────────────────────────────
 if [ "$HAS_DOCKER" = true ]; then
   info "Starting Docker services..."
-  docker compose up -d postgres mailpit minio minio-init
-  ok "Docker services started (postgres, mailpit, minio)"
+  docker compose up -d postgres mailpit
+  ok "Docker services started (postgres, mailpit)"
   echo ""
   info "Waiting for PostgreSQL to be ready..."
   until docker compose exec -T postgres pg_isready -U template >/dev/null 2>&1; do
@@ -73,8 +73,8 @@ if [ "$HAS_DOCKER" = true ]; then
   done
   ok "PostgreSQL is ready"
 else
-  warn "Skipping Docker — ensure PostgreSQL, MinIO, and Mailpit are running"
-  echo "  Required: postgres:5432 | minio:9000 | mailpit:1025"
+  warn "Skipping Docker — ensure PostgreSQL and Mailpit are running"
+  echo "  Required: postgres:5432 | mailpit:1025"
 fi
 
 # ── Database migrations ─────────────────────────────────────
@@ -98,5 +98,4 @@ echo -e "  ${CYAN}URLs:${NC}"
 echo "    API:        http://localhost:3001"
 echo "    Web:        http://localhost:5173"
 echo "    Mailpit:    http://localhost:8025"
-echo "    MinIO:      http://localhost:9001"
 echo ""

@@ -17,7 +17,7 @@ See: `.planning/PROJECT.md` (updated 2026-07-25)
 ## Recent Work
 
 - Switched Docker Compose PostgreSQL image to `postgres:16-alpine`.
-- Updated README to reflect Winston logger, `@workspace/files`, MinIO, and Terraform.
+- Updated README to reflect Winston logger, `@workspace/files`, floci S3, and Terraform.
 - Added Terraform modules for ECR, network, EKS, and gateway with dev/prod environments.
 - Initialized GSD planning artifacts (PROJECT.md, REQUIREMENTS.md, ROADMAP.md, STATE.md, config.json).
 - Re-ran graphify on the current codebase (879 nodes, 1036 edges, 53 communities).

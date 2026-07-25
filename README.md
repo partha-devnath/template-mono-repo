@@ -14,8 +14,8 @@ Production-ready full-stack monorepo template using **Bun**, **Vite**, **React**
 | Forms         | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev)                       |
 | Data Fetching | [TanStack React Query](https://tanstack.com/query)                                            |
 | State         | [Zustand](https://zustand-demo.pmnd.rs)                                                       |
-| Logging       | [Winston](https://github.com/winstonjs/winston) (server) + styled console (browser)          |
-| Storage       | [MinIO](https://min.io) / S3-compatible adapter (`@workspace/files`)                          |
+| Logging       | [Winston](https://github.com/winstonjs/winston) (server) + styled console (browser)           |
+| Storage       | S3-compatible adapter via `@workspace/files` (floci S3 / AWS S3 / LocalStack)                 |
 | Monorepo      | [Turborepo](https://turbo.build/repo)                                                         |
 | Styling       | [Tailwind CSS v4](https://tailwindcss.com)                                                    |
 
@@ -47,7 +47,7 @@ Production-ready full-stack monorepo template using **Bun**, **Vite**, **React**
 │   ├── email/            Email sender (console in dev, pluggable)
 │   ├── logger/           Winston structured logger
 │   └── files/            S3-compatible storage adapter + upload helper
-├── docker-compose.yml    PostgreSQL + API + web + MinIO services
+├── docker-compose.yml    PostgreSQL + API + web services
 ├── apps/api/Dockerfile   API multi-stage build
 ├── infra/terraform/      AWS infrastructure (ECR, EKS, ALB)
 ├── .dockerignore
@@ -320,37 +320,37 @@ Swap `Resend` for any provider (SendGrid, Postmark, SES, etc.). Implement the `E
 
 ## S3 / File Storage Setup
 
-File storage uses an S3-compatible adapter (`packages/files/src/storage.ts`). The API proxies file uploads and serves files through MinIO (local dev) or any S3-compatible provider (AWS S3, GCS, Cloudflare R2) in production.
+File storage uses an S3-compatible adapter (`packages/files/src/storage.ts`). The API proxies file uploads and serves files through **floci S3** (AWS S3 in the floci account) or any other S3-compatible provider (AWS S3, GCS, Cloudflare R2, LocalStack) in other environments.
 
-### MinIO (development)
+### floci S3 (default)
 
-MinIO is included in `docker-compose.yml`. It auto-creates the `template` bucket on startup.
-
-```env
-S3_ENDPOINT=http://localhost:9000
-S3_REGION=us-east-1
-S3_ACCESS_KEY_ID=minioadmin
-S3_SECRET_ACCESS_KEY=minioadmin
-S3_BUCKET=template
-# S3_BASE_URL=          # optional CDN/public URL
-```
-
-Run `docker compose up minio minio-init` to start MinIO. The console is available at http://localhost:9001.
-
-### AWS S3 / GCS / R2 (production)
-
-Change the env vars to your provider's credentials:
+Set the bucket and region. For standard AWS S3, leave `S3_ENDPOINT` empty.
 
 ```env
-S3_ENDPOINT=https://s3.us-east-1.amazonaws.com   # omit for standard AWS
 S3_REGION=us-east-1
 S3_ACCESS_KEY_ID=AKIAxxxxxxxxxxxx
 S3_SECRET_ACCESS_KEY=xxxxxxxxxxxx
-S3_BUCKET=my-app-uploads
-S3_BASE_URL=https://cdn.mydomain.com             # optional CDN URL
+S3_BUCKET=template
+# S3_BASE_URL=https://cdn.mydomain.com             # optional CDN/public URL
 ```
 
-The same `createS3Storage` adapter works with any S3-compatible provider. Set `S3_ENDPOINT` to the provider's API endpoint.
+The API uses IAM credentials from the environment when running in EKS. For local development, export the floci profile credentials or set them directly in `.env`.
+
+### Local S3-compatible endpoint
+
+For local development against LocalStack or a similar service, set the endpoint:
+
+```env
+S3_ENDPOINT=http://localhost:4566
+S3_REGION=us-east-1
+S3_ACCESS_KEY_ID=test
+S3_SECRET_ACCESS_KEY=test
+S3_BUCKET=template
+```
+
+### AWS S3 / GCS / R2
+
+The same `createS3Storage` adapter works with any S3-compatible provider. Set `S3_ENDPOINT` to the provider's API endpoint only when needed (omit it for standard AWS S3).
 
 ### Custom storage adapters
 
@@ -378,7 +378,7 @@ Predefined validation constants (in `packages/schemas/src/validations/files.ts`)
 | ---------------------- | -------- | ----------------------------------------------- |
 | `S3_BUCKET`            | No       | S3 bucket name (default: `template`)            |
 | `S3_REGION`            | No       | AWS region (default `us-east-1`)                |
-| `S3_ENDPOINT`          | No       | S3-compatible endpoint (MinIO, R2, GCS, etc.)   |
+| `S3_ENDPOINT`          | No       | S3-compatible endpoint (omit for standard AWS)  |
 | `S3_ACCESS_KEY_ID`     | No       | Access key (uses IAM role if omitted)           |
 | `S3_SECRET_ACCESS_KEY` | No       | Secret key (uses IAM role if omitted)           |
 | `S3_BASE_URL`          | No       | Public base URL or CDN origin for serving files |

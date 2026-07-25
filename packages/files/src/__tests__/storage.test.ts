@@ -5,7 +5,7 @@ describe("createS3Storage", () => {
   it("generates url with baseUrl", () => {
     const storage = createS3Storage({
       bucket: "my-bucket",
-      endpoint: "http://minio:9000",
+      endpoint: "http://localhost:4566",
       baseUrl: "https://cdn.example.com",
     })
     expect(storage.url("test.png")).toBe("https://cdn.example.com/test.png")
@@ -14,15 +14,17 @@ describe("createS3Storage", () => {
   it("generates url without baseUrl uses endpoint", () => {
     const storage = createS3Storage({
       bucket: "my-bucket",
-      endpoint: "http://minio:9000",
+      endpoint: "http://localhost:4566",
     })
-    expect(storage.url("test.png")).toBe("http://minio:9000/my-bucket/test.png")
+    expect(storage.url("test.png")).toBe(
+      "http://localhost:4566/my-bucket/test.png"
+    )
   })
 
   it("trim trailing slash on baseUrl", () => {
     const storage = createS3Storage({
       bucket: "my-bucket",
-      endpoint: "http://minio:9000",
+      endpoint: "http://localhost:4566",
       baseUrl: "https://cdn.example.com/",
     })
     expect(storage.url("test.png")).toBe("https://cdn.example.com/test.png")

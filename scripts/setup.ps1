@@ -64,8 +64,8 @@ ok "Dependencies installed"
 # ── Docker services ─────────────────────────────────────────
 if ($hasDocker) {
   info "Starting Docker services..."
-  docker compose up -d postgres mailpit minio minio-init
-  ok "Docker services started (postgres, mailpit, minio)"
+  docker compose up -d postgres mailpit
+  ok "Docker services started (postgres, mailpit)"
 
   info "Waiting for PostgreSQL to be ready..."
   do {
@@ -74,8 +74,8 @@ if ($hasDocker) {
   } until ($LASTEXITCODE -eq 0)
   ok "PostgreSQL is ready"
 } else {
-  warn "Skipping Docker — ensure PostgreSQL, MinIO, and Mailpit are running"
-  Write-Host "    Required: postgres:5432 | minio:9000 | mailpit:1025"
+  warn "Skipping Docker — ensure PostgreSQL and Mailpit are running"
+  Write-Host "    Required: postgres:5432 | mailpit:1025"
 }
 
 # ── Database migrations ─────────────────────────────────────
@@ -97,5 +97,4 @@ Write-Host "  URLs:" -f Cyan
 Write-Host "    API:        http://localhost:3001"
 Write-Host "    Web:        http://localhost:5173"
 Write-Host "    Mailpit:    http://localhost:8025"
-Write-Host "    MinIO:      http://localhost:9001"
 Write-Host ""

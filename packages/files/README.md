@@ -1,6 +1,6 @@
 # @workspace/files
 
-S3-compatible file storage adapter. Works with **MinIO** (local/dev), **AWS S3**, **Google Cloud Storage**, **Cloudflare R2**, and any S3-compatible provider.
+S3-compatible file storage adapter. Works with **AWS S3**, **floci S3**, **Google Cloud Storage**, **Cloudflare R2**, **LocalStack**, and any S3-compatible provider.
 
 ## Interface
 
@@ -27,11 +27,19 @@ import { createS3Storage } from "@workspace/files"
 
 const storage = createS3Storage({
   bucket: "my-bucket",
-  endpoint: "http://localhost:9000", // MinIO endpoint
   region: "us-east-1",
-  accessKeyId: "minioadmin",
-  secretAccessKey: "minioadmin",
+  accessKeyId: "AKIAxxxxxxxxxxxx",
+  secretAccessKey: "xxxxxxxxxxxx",
   baseUrl: "https://cdn.example.com", // optional CDN base URL
+})
+
+// For a local S3-compatible endpoint (e.g., LocalStack):
+const localStorage = createS3Storage({
+  bucket: "my-bucket",
+  endpoint: "http://localhost:4566",
+  region: "us-east-1",
+  accessKeyId: "test",
+  secretAccessKey: "test",
 })
 ```
 
@@ -39,8 +47,8 @@ const storage = createS3Storage({
 
 | Variable               | Required            | Default     | Description                         |
 | ---------------------- | ------------------- | ----------- | ----------------------------------- |
-| `S3_ENDPOINT`          | For MinIO           | —           | S3-compatible endpoint URL          |
-| `S3_REGION`            | No                  | `us-east-1` | AWS region (ignored by MinIO)       |
+| `S3_ENDPOINT`          | For local endpoints | —           | S3-compatible endpoint URL          |
+| `S3_REGION`            | No                  | `us-east-1` | AWS region                          |
 | `S3_ACCESS_KEY_ID`     | For private buckets | —           | Access key                          |
 | `S3_SECRET_ACCESS_KEY` | For private buckets | —           | Secret key                          |
 | `S3_BUCKET`            | Yes                 | —           | Bucket name                         |

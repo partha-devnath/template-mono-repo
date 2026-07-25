@@ -18,7 +18,7 @@ A developer can clone this template, run `bun install && docker compose up && bu
 - ✓ Protected dashboard route is available — existing
 - ✓ Database migrations run via Drizzle Kit — existing
 - ✓ Emails are captured in Mailpit in development — existing
-- ✓ S3-compatible file uploads via MinIO — existing
+- ✓ S3-compatible file uploads via floci S3 / AWS S3 adapter — existing
 
 ### Active
 
@@ -40,7 +40,7 @@ A developer can clone this template, run `bun install && docker compose up && bu
 - Internal packages are scoped to `@workspace/*` and are never published.
 - Auth is handled by Better Auth with Drizzle adapter and PostgreSQL backing.
 - File storage is abstracted behind `@workspace/files` with S3-compatible adapter.
-- Docker Compose includes PostgreSQL 16 Alpine, Mailpit, MinIO, and application services.
+- Docker Compose includes PostgreSQL 16 Alpine, Mailpit, and application services.
 - Terraform is provided for AWS ECR, EKS, and application gateway (ALB) provisioning.
 
 ## Constraints
@@ -53,22 +53,23 @@ A developer can clone this template, run `bun install && docker compose up && bu
 
 ## Key Decisions
 
-| Decision | Rationale | Outcome |
-|----------|-----------|---------|
-| Bun + Vite + React 19 | Fast dev loop, native TypeScript support, modern React | ✓ Good |
-| Hono for API | Lightweight, Zod-friendly, runs on Bun | ✓ Good |
-| Better Auth for auth | Reduces custom auth code and supports email verification/reset | ✓ Good |
-| Drizzle ORM + PostgreSQL | Type-safe schema-first migrations and queries | ✓ Good |
-| Winston for server logging | Structured logs with Pino-style transport flexibility | ✓ Good |
-| MinIO for local S3 dev | S3-compatible, runs in Docker, no AWS keys needed | ✓ Good |
-| PostgreSQL 16 Alpine | User-selected stable version with smaller image | ✓ Good |
-| Terraform EKS/ALB for AWS | Scalable managed Kubernetes with path-based routing | — Pending |
+| Decision                   | Rationale                                                      | Outcome   |
+| -------------------------- | -------------------------------------------------------------- | --------- |
+| Bun + Vite + React 19      | Fast dev loop, native TypeScript support, modern React         | ✓ Good    |
+| Hono for API               | Lightweight, Zod-friendly, runs on Bun                         | ✓ Good    |
+| Better Auth for auth       | Reduces custom auth code and supports email verification/reset | ✓ Good    |
+| Drizzle ORM + PostgreSQL   | Type-safe schema-first migrations and queries                  | ✓ Good    |
+| Winston for server logging | Structured logs with Pino-style transport flexibility          | ✓ Good    |
+| S3-compatible file storage | Uses `@workspace/files` with AWS S3 / floci S3 adapter         | ✓ Good    |
+| PostgreSQL 16 Alpine       | User-selected stable version with smaller image                | ✓ Good    |
+| Terraform EKS/ALB for AWS  | Scalable managed Kubernetes with path-based routing            | — Pending |
 
 ## Evolution
 
 This document evolves at phase transitions and milestone boundaries.
 
 **After each phase transition** (via `/gsd-transition`):
+
 1. Requirements invalidated? → Move to Out of Scope with reason
 2. Requirements validated? → Move to Validated with phase reference
 3. New requirements emerged? → Add to Active
@@ -76,10 +77,12 @@ This document evolves at phase transitions and milestone boundaries.
 5. "What This Is" still accurate? → Update if drifted
 
 **After each milestone** (via `/gsd-complete-milestone`):
+
 1. Full review of all sections
 2. Core Value check — still the right priority?
 3. Audit Out of Scope — reasons still valid?
 4. Update Context with current state
 
 ---
-*Last updated: 2026-07-25 after GSD project initialization*
+
+_Last updated: 2026-07-25 after GSD project initialization_
