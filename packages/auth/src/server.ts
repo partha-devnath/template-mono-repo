@@ -8,7 +8,7 @@ import { createLogger } from "@workspace/logger"
 const logger = createLogger("auth")
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3001",
+  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3001/api/auth",
   trustedOrigins: [process.env.CLIENT_URL ?? "http://localhost:5173"],
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -23,6 +23,23 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: true,
     autoSignIn: true,
+    sendResetPassword: async ({
+      user,
+      url,
+      token,
+    }: {
+      user: { id: string; email: string }
+      url: string
+      token: string
+    }) => {
+      const clientUrl = process.env.CLIENT_URL ?? "http://localhost:5173"
+      const redirectUrl = `${clientUrl}/reset-password?token=${token}`
+      logger.info({ userId: user.id }, "Sending reset password email")
+      await emailSender.sendResetPasswordEmail({
+        email: user.email,
+        url: redirectUrl,
+      })
+    },
   },
   emailVerification: {
     sendOnSignUp: true,
@@ -30,37 +47,16 @@ export const auth = betterAuth({
     sendVerificationEmail: async ({
       user,
       url,
+      token,
     }: {
       user: { id: string; email: string }
       url: string
+      token: string
     }) => {
       const clientUrl = process.env.CLIENT_URL ?? "http://localhost:5173"
-      const token = new URL(url).searchParams.get("token")
-      const redirectUrl = token
-        ? `${clientUrl}/verify-email?token=${token}`
-        : url
+      const redirectUrl = `${clientUrl}/verify-email?token=${token}`
       logger.info({ userId: user.id }, "Sending verification email")
       await emailSender.sendVerificationEmail({
-        email: user.email,
-        url: redirectUrl,
-      })
-    },
-  },
-  resetPassword: {
-    sendResetPasswordEmail: async ({
-      user,
-      url,
-    }: {
-      user: { id: string; email: string }
-      url: string
-    }) => {
-      const clientUrl = process.env.CLIENT_URL ?? "http://localhost:5173"
-      const token = new URL(url).searchParams.get("token")
-      const redirectUrl = token
-        ? `${clientUrl}/reset-password?token=${token}`
-        : url
-      logger.info({ userId: user.id }, "Sending reset password email")
-      await emailSender.sendResetPasswordEmail({
         email: user.email,
         url: redirectUrl,
       })

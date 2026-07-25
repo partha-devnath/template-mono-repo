@@ -31,7 +31,7 @@ services:
     environment:
       DATABASE_URL: postgres://template:template@postgres:5432/template
       BETTER_AUTH_SECRET: change-me-to-a-random-string-at-least-32-chars
-      BETTER_AUTH_URL: http://localhost:3001
+      BETTER_AUTH_URL: http://localhost:3001/api/auth
       CLIENT_URL: http://localhost:5173
       PORT: "3001"
       LOG_LEVEL: info
@@ -40,8 +40,7 @@ services:
       EMAIL_FROM: noreply@localhost
       S3_REGION: us-east-1
       S3_BUCKET: template
-      # Optional: override for a local S3-compatible endpoint
-      # S3_ENDPOINT: http://localhost:4566
+      S3_ENDPOINT: http://host.docker.internal:4566
     depends_on:
       postgres:
         condition: service_healthy

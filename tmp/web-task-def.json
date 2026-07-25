@@ -1,0 +1,8 @@
+[
+  {
+    "name": "web",
+    "image": "000000000000.dkr.ecr.us-east-1.localhost:5100/template-mono-repo/web:k8s",
+    "memory": 256,
+    "cpu": 128
+  }
+]

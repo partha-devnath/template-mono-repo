@@ -1,0 +1,8 @@
+[
+  {
+    "name": "api",
+    "image": "000000000000.dkr.ecr.us-east-1.localhost:5100/template-mono-repo/api:k8s",
+    "memory": 512,
+    "cpu": 256
+  }
+]
