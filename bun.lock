@@ -78,6 +78,7 @@
       "dependencies": {
         "@workspace/db": "workspace:*",
         "@workspace/email": "workspace:*",
+        "@workspace/logger": "workspace:*",
         "@workspace/schemas": "workspace:*",
         "better-auth": "^1.2.0",
       },
