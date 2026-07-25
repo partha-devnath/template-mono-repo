@@ -17,6 +17,8 @@ WORKDIR /app
 COPY . .
 
 RUN bun install
+ARG VITE_API_URL=http://localhost:3001
+ENV VITE_API_URL=$VITE_API_URL
 RUN bun run --cwd apps/web build:docker
 
 # --- Stage 3: Runner ---

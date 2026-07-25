@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: template-mono-repo
+data:
+  CLIENT_URL: "http://localhost"
+  PORT: "3001"
+  LOG_LEVEL: "info"
+  EMAIL_PROVIDER: "console"
+  EMAIL_FROM: "noreply@localhost"
+  BETTER_AUTH_URL: "http://localhost"
+  S3_REGION: "us-east-1"
+  S3_BUCKET: "template"
+  S3_ENDPOINT: "http://host.docker.internal:4566"
