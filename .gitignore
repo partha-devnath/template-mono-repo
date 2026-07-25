@@ -38,3 +38,9 @@ graphify-out/
 
 # typescript
 *.tsbuildinfo
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
