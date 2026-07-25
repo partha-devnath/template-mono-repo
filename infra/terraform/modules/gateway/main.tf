@@ -7,87 +7,95 @@ terraform {
   }
 }
 
-module "alb" {
-  source  = "terraform-aws-modules/alb/aws"
-  version = "~> 9.0"
-
-  name = "${var.project_name}-alb"
-
+resource "aws_lb" "this" {
+  name               = "${var.project_name}-alb"
+  internal           = false
   load_balancer_type = "application"
-  vpc_id             = var.vpc_id
-  subnets            = var.public_subnets
   security_groups    = var.security_group_ids
+  subnets            = var.public_subnets
 
-  listeners = {
-    http = {
-      port     = 80
-      protocol = "HTTP"
-      fixed_response = {
-        content_type = "text/plain"
-        message_body = "Redirecting to HTTPS"
-        status_code  = "301"
-      }
-      # For production, add an HTTPS listener with an ACM certificate.
-    }
+  tags = var.tags
+}
+
+resource "aws_lb_target_group" "api" {
+  name_prefix          = "api-"
+  port                 = 3001
+  protocol             = "HTTP"
+  vpc_id               = var.vpc_id
+  target_type          = "ip"
+  deregistration_delay = 30
+
+  health_check {
+    enabled             = true
+    healthy_threshold   = 2
+    interval            = 30
+    matcher             = "200"
+    path                = "/api/health"
+    port                = "traffic-port"
+    protocol            = "HTTP"
+    timeout             = 5
+    unhealthy_threshold = 3
   }
 
-  target_groups = {
-    api = {
-      name_prefix          = "api-"
-      protocol             = "HTTP"
-      port                 = 3001
-      target_type          = "ip"
-      deregistration_delay = 30
-      create_attachment    = false
+  tags = var.tags
 
-      health_check = {
-        enabled             = true
-        healthy_threshold   = 2
-        interval            = 30
-        matcher             = "200"
-        path                = "/api/health"
-        port                = "traffic-port"
-        protocol            = "HTTP"
-        timeout             = 5
-        unhealthy_threshold = 3
-      }
-    }
+  lifecycle {
+    create_before_destroy = true
+  }
+}
 
-    web = {
-      name_prefix          = "web-"
-      protocol             = "HTTP"
-      port                 = 5173
-      target_type          = "ip"
-      deregistration_delay = 30
-      create_attachment    = false
+resource "aws_lb_target_group" "web" {
+  name_prefix          = "web-"
+  port                 = 5173
+  protocol             = "HTTP"
+  vpc_id               = var.vpc_id
+  target_type          = "ip"
+  deregistration_delay = 30
 
-      health_check = {
-        enabled             = true
-        healthy_threshold   = 2
-        interval            = 30
-        matcher             = "200"
-        path                = "/"
-        port                = "traffic-port"
-        protocol            = "HTTP"
-        timeout             = 5
-        unhealthy_threshold = 3
-      }
-    }
+  health_check {
+    enabled             = true
+    healthy_threshold   = 2
+    interval            = 30
+    matcher             = "200"
+    path                = "/"
+    port                = "traffic-port"
+    protocol            = "HTTP"
+    timeout             = 5
+    unhealthy_threshold = 3
   }
 
-  # Path-based routing: /api/* -> API, everything else -> web
-  route_records = {
-    api = {
-      listener_key     = "http"
-      priority         = 100
-      target_group_key = "api"
-      paths            = ["/api/*"]
-    }
-    web = {
-      listener_key     = "http"
-      priority         = 200
-      target_group_key = "web"
-      paths            = ["/*"]
+  tags = var.tags
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.this.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.web.arn
+  }
+
+  tags = var.tags
+}
+
+resource "aws_lb_listener_rule" "api" {
+  listener_arn = aws_lb_listener.http.arn
+  priority     = 100
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.api.arn
+  }
+
+  condition {
+    path_pattern {
+      values = ["/api/*"]
     }
   }
 
