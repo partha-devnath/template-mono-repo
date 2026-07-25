@@ -126,6 +126,10 @@ app.use(
   })
 )
 
+app.get("/", (c) =>
+  c.json({ success: true, data: { service: "template-mono-repo-api" } })
+)
+
 app.use("/api/auth/*", rateLimiter(30, 60_000))
 
 app.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw))
