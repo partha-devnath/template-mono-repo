@@ -13,7 +13,8 @@ infra/terraform/
 │   └── eks/      # EKS cluster and managed node groups
 ├── environments/
 │   ├── dev/      # Development environment
-│   └── prod/     # Production environment
+│   ├── prod/     # Production environment
+│   └── floci/    # floci AWS environment
 ```
 
 ## Deployment

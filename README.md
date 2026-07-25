@@ -456,7 +456,7 @@ Services:
 Production infrastructure is provisioned with Terraform in `infra/terraform/`:
 
 ```bash
-cd infra/terraform/environments/dev
+cd infra/terraform/environments/floci
 terraform init
 terraform plan
 terraform apply
