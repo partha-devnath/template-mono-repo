@@ -408,5 +408,655 @@
     "mtime": 1781892022.991781,
     "ast_hash": "b24f7d96e7abb7718173a4857393a346",
     "semantic_hash": "b24f7d96e7abb7718173a4857393a346"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\.lintstagedrc.json": {
+    "mtime": 1784975815.6310568,
+    "ast_hash": "95a88c8c4a8f99c446e1240a5d7ac5e4",
+    "semantic_hash": "95a88c8c4a8f99c446e1240a5d7ac5e4"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\.planning\\config.json": {
+    "mtime": 1784976352.1209025,
+    "ast_hash": "53c50c824c3820480259be1e2553f339",
+    "semantic_hash": "53c50c824c3820480259be1e2553f339"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\api\\eslint.config.js": {
+    "mtime": 1784975815.634468,
+    "ast_hash": "496f7d27b4375d793ad59e92fe11c23b",
+    "semantic_hash": "496f7d27b4375d793ad59e92fe11c23b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\api\\package.json": {
+    "mtime": 1784975815.634468,
+    "ast_hash": "c5bd564bc14d59793ea0ff78fd3fb30c",
+    "semantic_hash": "c5bd564bc14d59793ea0ff78fd3fb30c"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\api\\src\\__tests__\\app.test.ts": {
+    "mtime": 1784975815.6354697,
+    "ast_hash": "3c9a16c73bda5c869b0a51fd389edf50",
+    "semantic_hash": "3c9a16c73bda5c869b0a51fd389edf50"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\api\\src\\app.ts": {
+    "mtime": 1784975815.6354697,
+    "ast_hash": "f7fd6ccb8f7713713992e5532e9a3def",
+    "semantic_hash": "f7fd6ccb8f7713713992e5532e9a3def"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\api\\src\\env.ts": {
+    "mtime": 1784975815.6354697,
+    "ast_hash": "6b779903224539aef6702789c1df32a9",
+    "semantic_hash": "6b779903224539aef6702789c1df32a9"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\api\\src\\index.ts": {
+    "mtime": 1784975815.6354697,
+    "ast_hash": "0d979e6a0652185bb11c1f3506a106aa",
+    "semantic_hash": "0d979e6a0652185bb11c1f3506a106aa"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\api\\tsconfig.json": {
+    "mtime": 1784975815.6364653,
+    "ast_hash": "69fb081a3551e7215b33e7445b227b82",
+    "semantic_hash": "69fb081a3551e7215b33e7445b227b82"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\components.json": {
+    "mtime": 1784975815.6364653,
+    "ast_hash": "ecd73986656eb5051abd6e08de4c7968",
+    "semantic_hash": "ecd73986656eb5051abd6e08de4c7968"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\eslint.config.js": {
+    "mtime": 1784975815.6374638,
+    "ast_hash": "0355276bc79439afe3c53e3a2470ca1e",
+    "semantic_hash": "0355276bc79439afe3c53e3a2470ca1e"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\package.json": {
+    "mtime": 1784975815.6374638,
+    "ast_hash": "6a40699092b59842b2faed2111245bab",
+    "semantic_hash": "6a40699092b59842b2faed2111245bab"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\App.tsx": {
+    "mtime": 1784975815.6384642,
+    "ast_hash": "c59ef0c571ba3efa82ab19f0c7379dbb",
+    "semantic_hash": "c59ef0c571ba3efa82ab19f0c7379dbb"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\components\\error-boundary.tsx": {
+    "mtime": 1784975815.6389701,
+    "ast_hash": "c018ceaf74a7360194f1a2d4c6cec80d",
+    "semantic_hash": "c018ceaf74a7360194f1a2d4c6cec80d"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\components\\protected-route.tsx": {
+    "mtime": 1784975815.6389701,
+    "ast_hash": "90c356536e9d52824b26102d7979e94b",
+    "semantic_hash": "90c356536e9d52824b26102d7979e94b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\components\\theme-provider.tsx": {
+    "mtime": 1784975815.6399753,
+    "ast_hash": "7acb1d3d5f4e7cc8d9b87e04f197c094",
+    "semantic_hash": "7acb1d3d5f4e7cc8d9b87e04f197c094"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\hooks\\use-auth.ts": {
+    "mtime": 1784975815.6399753,
+    "ast_hash": "febac370f988d0f51d2ac4c593a272f3",
+    "semantic_hash": "febac370f988d0f51d2ac4c593a272f3"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\hooks\\use-user.ts": {
+    "mtime": 1784975815.6409757,
+    "ast_hash": "7b87d29f870c766af544fd1b782c77b0",
+    "semantic_hash": "7b87d29f870c766af544fd1b782c77b0"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\lib\\api-client.ts": {
+    "mtime": 1784975815.6409757,
+    "ast_hash": "7debc9bbfc1ac069447d9267c9b5e44c",
+    "semantic_hash": "7debc9bbfc1ac069447d9267c9b5e44c"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\lib\\auth-client.ts": {
+    "mtime": 1784975815.6409757,
+    "ast_hash": "057514bded41071907f51f868bb7def3",
+    "semantic_hash": "057514bded41071907f51f868bb7def3"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\main.tsx": {
+    "mtime": 1784975815.641975,
+    "ast_hash": "626db60504952953c6770f21ebc5338c",
+    "semantic_hash": "626db60504952953c6770f21ebc5338c"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\providers\\app-provider.tsx": {
+    "mtime": 1784975815.641975,
+    "ast_hash": "f67f87e67eac54e621f0607eff6d7761",
+    "semantic_hash": "f67f87e67eac54e621f0607eff6d7761"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\providers\\query-provider.tsx": {
+    "mtime": 1784975815.642975,
+    "ast_hash": "e00cce7e4c93cdc93c799fdd47ebf840",
+    "semantic_hash": "e00cce7e4c93cdc93c799fdd47ebf840"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\routes\\dashboard.tsx": {
+    "mtime": 1784975815.642975,
+    "ast_hash": "d9c05870b26e02dae3ce0b901aad7d77",
+    "semantic_hash": "d9c05870b26e02dae3ce0b901aad7d77"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\routes\\forgot-password.tsx": {
+    "mtime": 1784975815.642975,
+    "ast_hash": "bcc7b5c79c1d002e319eb4d3c697c228",
+    "semantic_hash": "bcc7b5c79c1d002e319eb4d3c697c228"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\routes\\login.tsx": {
+    "mtime": 1784975815.643975,
+    "ast_hash": "4d9bf175f91087626685c1a573941f77",
+    "semantic_hash": "4d9bf175f91087626685c1a573941f77"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\routes\\reset-password.tsx": {
+    "mtime": 1784975815.643975,
+    "ast_hash": "e8a16dc87748d3086ab1858b1095df9a",
+    "semantic_hash": "e8a16dc87748d3086ab1858b1095df9a"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\routes\\signup.tsx": {
+    "mtime": 1784975815.643975,
+    "ast_hash": "19eb3bd44432057baa091121f3bc0918",
+    "semantic_hash": "19eb3bd44432057baa091121f3bc0918"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\routes\\verify-email.tsx": {
+    "mtime": 1784975815.643975,
+    "ast_hash": "2a6e05617039beea777fa2bfc623d560",
+    "semantic_hash": "2a6e05617039beea777fa2bfc623d560"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\src\\stores\\app-store.ts": {
+    "mtime": 1784975815.6449754,
+    "ast_hash": "d4aebca7dafcee61c9290114d2570d24",
+    "semantic_hash": "d4aebca7dafcee61c9290114d2570d24"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\tsconfig.app.json": {
+    "mtime": 1784975815.6449754,
+    "ast_hash": "cb244b63e030775456fef9dc6ce3bce7",
+    "semantic_hash": "cb244b63e030775456fef9dc6ce3bce7"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\tsconfig.json": {
+    "mtime": 1784975815.6459749,
+    "ast_hash": "f5c18f9ec38cf21e542267615a1b0464",
+    "semantic_hash": "f5c18f9ec38cf21e542267615a1b0464"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\tsconfig.node.json": {
+    "mtime": 1784975815.6459749,
+    "ast_hash": "70bdd0a673bcfc0e828080b306e7c680",
+    "semantic_hash": "70bdd0a673bcfc0e828080b306e7c680"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\vite.config.ts": {
+    "mtime": 1784975815.6459749,
+    "ast_hash": "f4519db00b55a440554957a5813a4df9",
+    "semantic_hash": "f4519db00b55a440554957a5813a4df9"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\commitlint.config.mjs": {
+    "mtime": 1784975815.6487172,
+    "ast_hash": "7933b76254d20793d11e2f56433249ed",
+    "semantic_hash": "7933b76254d20793d11e2f56433249ed"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\environments\\dev\\main.tf": {
+    "mtime": 1784976188.6592567,
+    "ast_hash": "206add2f7c838b1123aa33febde4f807",
+    "semantic_hash": "206add2f7c838b1123aa33febde4f807"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\environments\\dev\\outputs.tf": {
+    "mtime": 1784976209.7673988,
+    "ast_hash": "7a0c8535597629704b6050b0fae747a8",
+    "semantic_hash": "7a0c8535597629704b6050b0fae747a8"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\environments\\dev\\variables.tf": {
+    "mtime": 1784976192.7125463,
+    "ast_hash": "2efb9eb989769f64a1aaa43005dc2166",
+    "semantic_hash": "2efb9eb989769f64a1aaa43005dc2166"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\environments\\prod\\main.tf": {
+    "mtime": 1784976226.0896578,
+    "ast_hash": "c30a24c25d212595ea283b45e5aed7bd",
+    "semantic_hash": "c30a24c25d212595ea283b45e5aed7bd"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\environments\\prod\\outputs.tf": {
+    "mtime": 1784976235.1616151,
+    "ast_hash": "7a0c8535597629704b6050b0fae747a8",
+    "semantic_hash": "7a0c8535597629704b6050b0fae747a8"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\environments\\prod\\variables.tf": {
+    "mtime": 1784976230.8850245,
+    "ast_hash": "2a2b10dd2a326b5e2b6b0a0e203576e3",
+    "semantic_hash": "2a2b10dd2a326b5e2b6b0a0e203576e3"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\ecr\\main.tf": {
+    "mtime": 1784976018.0685737,
+    "ast_hash": "44266cab937214b014b63cf6b9af12f8",
+    "semantic_hash": "44266cab937214b014b63cf6b9af12f8"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\ecr\\outputs.tf": {
+    "mtime": 1784976040.8389518,
+    "ast_hash": "b94dcf3c8ba470e0e710a71e86a8282a",
+    "semantic_hash": "b94dcf3c8ba470e0e710a71e86a8282a"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\ecr\\variables.tf": {
+    "mtime": 1784976028.3723843,
+    "ast_hash": "583b9c0e641afb9fa2283c66e5456d4e",
+    "semantic_hash": "583b9c0e641afb9fa2283c66e5456d4e"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\eks\\main.tf": {
+    "mtime": 1784976136.01616,
+    "ast_hash": "844e54d9ed0caabb5aadc2345b2f87f3",
+    "semantic_hash": "844e54d9ed0caabb5aadc2345b2f87f3"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\eks\\outputs.tf": {
+    "mtime": 1784976145.9656959,
+    "ast_hash": "26853cb374973b9bbdee1c1c7eeb7ad5",
+    "semantic_hash": "26853cb374973b9bbdee1c1c7eeb7ad5"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\eks\\variables.tf": {
+    "mtime": 1784976142.178934,
+    "ast_hash": "75de6fbb7a37118cb95bd4e94e97ce34",
+    "semantic_hash": "75de6fbb7a37118cb95bd4e94e97ce34"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\gateway\\main.tf": {
+    "mtime": 1784976159.658369,
+    "ast_hash": "cdbc80a8a86d1d8009c02751fec51688",
+    "semantic_hash": "cdbc80a8a86d1d8009c02751fec51688"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\gateway\\outputs.tf": {
+    "mtime": 1784976174.146489,
+    "ast_hash": "3f282c01d8e36e1116d7313400d2a729",
+    "semantic_hash": "3f282c01d8e36e1116d7313400d2a729"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\gateway\\variables.tf": {
+    "mtime": 1784976170.11637,
+    "ast_hash": "82d64b5ad3018bf7601ca3d3d9620c38",
+    "semantic_hash": "82d64b5ad3018bf7601ca3d3d9620c38"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\network\\main.tf": {
+    "mtime": 1784976113.983572,
+    "ast_hash": "7972edd8a8e0ef53868ca6bfb82ee53e",
+    "semantic_hash": "7972edd8a8e0ef53868ca6bfb82ee53e"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\network\\outputs.tf": {
+    "mtime": 1784976125.5395539,
+    "ast_hash": "c516e5ffb711fa49f7226c3eb7452779",
+    "semantic_hash": "c516e5ffb711fa49f7226c3eb7452779"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\modules\\network\\variables.tf": {
+    "mtime": 1784976122.0579212,
+    "ast_hash": "be0f7d922c41d935c7e2dbae834e30a9",
+    "semantic_hash": "be0f7d922c41d935c7e2dbae834e30a9"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\package.json": {
+    "mtime": 1784975815.7178793,
+    "ast_hash": "95290f66a4e20e351fb01def42500070",
+    "semantic_hash": "95290f66a4e20e351fb01def42500070"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\auth\\eslint.config.js": {
+    "mtime": 1784975815.7178793,
+    "ast_hash": "496f7d27b4375d793ad59e92fe11c23b",
+    "semantic_hash": "496f7d27b4375d793ad59e92fe11c23b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\auth\\package.json": {
+    "mtime": 1784975815.7178793,
+    "ast_hash": "8a0de311f51ea08f258815f30b1e24c8",
+    "semantic_hash": "8a0de311f51ea08f258815f30b1e24c8"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\auth\\src\\index.ts": {
+    "mtime": 1784975815.7178793,
+    "ast_hash": "6ea37b7899243d566c9b8aa6c6943cfe",
+    "semantic_hash": "6ea37b7899243d566c9b8aa6c6943cfe"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\auth\\src\\server.ts": {
+    "mtime": 1784975815.7178793,
+    "ast_hash": "6cd49c31c9071bbece02c016e3da68f4",
+    "semantic_hash": "6cd49c31c9071bbece02c016e3da68f4"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\auth\\tsconfig.json": {
+    "mtime": 1784975815.7178793,
+    "ast_hash": "4918f9d1cea8a0c5785e33ff6dccd893",
+    "semantic_hash": "4918f9d1cea8a0c5785e33ff6dccd893"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\drizzle.config.ts": {
+    "mtime": 1784975815.7217288,
+    "ast_hash": "dba24eddacc3d08e4c96ca264f22e629",
+    "semantic_hash": "dba24eddacc3d08e4c96ca264f22e629"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\eslint.config.js": {
+    "mtime": 1784975815.7217288,
+    "ast_hash": "496f7d27b4375d793ad59e92fe11c23b",
+    "semantic_hash": "496f7d27b4375d793ad59e92fe11c23b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\migrations\\0000_curious_scalphunter.sql": {
+    "mtime": 1784975815.7217288,
+    "ast_hash": "021d9abce59c4be6afb2c4e66e99642d",
+    "semantic_hash": "021d9abce59c4be6afb2c4e66e99642d"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\migrations\\meta\\0000_snapshot.json": {
+    "mtime": 1784975815.7217288,
+    "ast_hash": "9d41d8edf1ff9ef00c6dee5b5f87da34",
+    "semantic_hash": "9d41d8edf1ff9ef00c6dee5b5f87da34"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\migrations\\meta\\_journal.json": {
+    "mtime": 1784975815.7235973,
+    "ast_hash": "540f7c84cfc257d64f2828c54c21d690",
+    "semantic_hash": "540f7c84cfc257d64f2828c54c21d690"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\package.json": {
+    "mtime": 1784975815.7235973,
+    "ast_hash": "976dc9506923855479c2a9676bb46b75",
+    "semantic_hash": "976dc9506923855479c2a9676bb46b75"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\src\\client.ts": {
+    "mtime": 1784975815.7246065,
+    "ast_hash": "f8ee39f16360cddd8a243fe39a3adf5c",
+    "semantic_hash": "f8ee39f16360cddd8a243fe39a3adf5c"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\src\\index.ts": {
+    "mtime": 1784975815.7246065,
+    "ast_hash": "6a06d2ee3ef32804f77e5adffbfb33f0",
+    "semantic_hash": "6a06d2ee3ef32804f77e5adffbfb33f0"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\src\\migrate.ts": {
+    "mtime": 1784975815.7246065,
+    "ast_hash": "ecf048050cdc203da00d7ee4810a3579",
+    "semantic_hash": "ecf048050cdc203da00d7ee4810a3579"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\db\\tsconfig.json": {
+    "mtime": 1784975815.7246065,
+    "ast_hash": "671d10ff4ecc13d63d56e679a0cce114",
+    "semantic_hash": "671d10ff4ecc13d63d56e679a0cce114"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\email\\eslint.config.js": {
+    "mtime": 1784975815.7256036,
+    "ast_hash": "496f7d27b4375d793ad59e92fe11c23b",
+    "semantic_hash": "496f7d27b4375d793ad59e92fe11c23b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\email\\package.json": {
+    "mtime": 1784975815.7256036,
+    "ast_hash": "8753ffe181af41a0ae94bfcc6e3599db",
+    "semantic_hash": "8753ffe181af41a0ae94bfcc6e3599db"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\email\\src\\index.ts": {
+    "mtime": 1784975815.7266047,
+    "ast_hash": "1fb234c9b999a0720995ff98737e2976",
+    "semantic_hash": "1fb234c9b999a0720995ff98737e2976"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\email\\tsconfig.json": {
+    "mtime": 1784975815.7266047,
+    "ast_hash": "e61c628517358ead9c01b710693ed8ff",
+    "semantic_hash": "e61c628517358ead9c01b710693ed8ff"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\eslint.config.js": {
+    "mtime": 1784975815.7276032,
+    "ast_hash": "496f7d27b4375d793ad59e92fe11c23b",
+    "semantic_hash": "496f7d27b4375d793ad59e92fe11c23b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\package.json": {
+    "mtime": 1784975815.7276032,
+    "ast_hash": "e116b0446c0795914b521a0fb89e6ae9",
+    "semantic_hash": "e116b0446c0795914b521a0fb89e6ae9"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\src\\__tests__\\storage.test.ts": {
+    "mtime": 1784975815.7276032,
+    "ast_hash": "253a553eac4abf6ffbfad0d0f42002df",
+    "semantic_hash": "253a553eac4abf6ffbfad0d0f42002df"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\src\\__tests__\\utils.test.ts": {
+    "mtime": 1784975815.7286036,
+    "ast_hash": "6d65e54f3ecfa8b21f41fe8cf1f33bfc",
+    "semantic_hash": "6d65e54f3ecfa8b21f41fe8cf1f33bfc"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\src\\index.ts": {
+    "mtime": 1784975815.7286036,
+    "ast_hash": "d67c37bea293649bd2656c81ec5f21b2",
+    "semantic_hash": "d67c37bea293649bd2656c81ec5f21b2"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\src\\serve.ts": {
+    "mtime": 1784975815.7286036,
+    "ast_hash": "8853ebb90de4a0196a125a7956b2c597",
+    "semantic_hash": "8853ebb90de4a0196a125a7956b2c597"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\src\\storage.ts": {
+    "mtime": 1784975815.729603,
+    "ast_hash": "3ed39b1f4bd91d38bc111304755954c5",
+    "semantic_hash": "3ed39b1f4bd91d38bc111304755954c5"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\src\\upload.ts": {
+    "mtime": 1784975815.729603,
+    "ast_hash": "c0f5e9e23de841bc3fd689e744f0f009",
+    "semantic_hash": "c0f5e9e23de841bc3fd689e744f0f009"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\src\\utils.ts": {
+    "mtime": 1784975815.729603,
+    "ast_hash": "f6bc176b72c3de4bce8f18cf31b83305",
+    "semantic_hash": "f6bc176b72c3de4bce8f18cf31b83305"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\tsconfig.json": {
+    "mtime": 1784975815.729603,
+    "ast_hash": "ac4df5c743114701df889f539e9504a7",
+    "semantic_hash": "ac4df5c743114701df889f539e9504a7"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\logger\\eslint.config.js": {
+    "mtime": 1784975815.7306037,
+    "ast_hash": "496f7d27b4375d793ad59e92fe11c23b",
+    "semantic_hash": "496f7d27b4375d793ad59e92fe11c23b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\logger\\package.json": {
+    "mtime": 1784975815.7306037,
+    "ast_hash": "d77082851538e08d4462438575aed858",
+    "semantic_hash": "d77082851538e08d4462438575aed858"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\logger\\src\\browser.ts": {
+    "mtime": 1784975815.7316031,
+    "ast_hash": "c84e5dfccd94cda56ece3344804dd2b5",
+    "semantic_hash": "c84e5dfccd94cda56ece3344804dd2b5"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\logger\\src\\index.ts": {
+    "mtime": 1784975815.7316031,
+    "ast_hash": "f2ae345469cce05c3b0949851c06bfd8",
+    "semantic_hash": "f2ae345469cce05c3b0949851c06bfd8"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\logger\\src\\server.ts": {
+    "mtime": 1784975815.7316031,
+    "ast_hash": "de45a5757c5f26cfba8ddc4a0495708b",
+    "semantic_hash": "de45a5757c5f26cfba8ddc4a0495708b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\logger\\src\\types.ts": {
+    "mtime": 1784975815.7316031,
+    "ast_hash": "65dffe316608d172c42ec0e183c4383f",
+    "semantic_hash": "65dffe316608d172c42ec0e183c4383f"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\logger\\tsconfig.json": {
+    "mtime": 1784975815.7316031,
+    "ast_hash": "e61c628517358ead9c01b710693ed8ff",
+    "semantic_hash": "e61c628517358ead9c01b710693ed8ff"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\eslint.config.js": {
+    "mtime": 1784975815.7326033,
+    "ast_hash": "496f7d27b4375d793ad59e92fe11c23b",
+    "semantic_hash": "496f7d27b4375d793ad59e92fe11c23b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\package.json": {
+    "mtime": 1784975815.7326033,
+    "ast_hash": "96e40240afa91ca65c63a59ca97ec96a",
+    "semantic_hash": "96e40240afa91ca65c63a59ca97ec96a"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\__tests__\\auth.test.ts": {
+    "mtime": 1784975815.7326033,
+    "ast_hash": "8e8edf479aa4fa5060435c6e3c9f6736",
+    "semantic_hash": "8e8edf479aa4fa5060435c6e3c9f6736"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\db\\accounts.ts": {
+    "mtime": 1784975815.7336037,
+    "ast_hash": "61e742dc68385aa0d62a2d334192440e",
+    "semantic_hash": "61e742dc68385aa0d62a2d334192440e"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\db\\files.ts": {
+    "mtime": 1784975815.7346096,
+    "ast_hash": "517c2e6a7b1ea439c0c4f34ae349df5a",
+    "semantic_hash": "517c2e6a7b1ea439c0c4f34ae349df5a"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\db\\sessions.ts": {
+    "mtime": 1784975815.7346096,
+    "ast_hash": "b7bba05eb583810582e944e0aee16c23",
+    "semantic_hash": "b7bba05eb583810582e944e0aee16c23"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\db\\users.ts": {
+    "mtime": 1784975815.7346096,
+    "ast_hash": "9eee09c6f25500413f7d6a7aa29d3830",
+    "semantic_hash": "9eee09c6f25500413f7d6a7aa29d3830"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\db\\verifications.ts": {
+    "mtime": 1784975815.7356055,
+    "ast_hash": "839bb6a43b4ce7b6b598de652886044c",
+    "semantic_hash": "839bb6a43b4ce7b6b598de652886044c"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\index.ts": {
+    "mtime": 1784975815.7356055,
+    "ast_hash": "1e0d83f569f737e9508f20caaedaf54c",
+    "semantic_hash": "1e0d83f569f737e9508f20caaedaf54c"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\types\\api.ts": {
+    "mtime": 1784975815.7356055,
+    "ast_hash": "9c8e88d2c59e6de715d8abf3d1d3a64c",
+    "semantic_hash": "9c8e88d2c59e6de715d8abf3d1d3a64c"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\validations\\auth.ts": {
+    "mtime": 1784975815.736605,
+    "ast_hash": "c4188e4205d8e486506b8c2c0a083336",
+    "semantic_hash": "c4188e4205d8e486506b8c2c0a083336"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\src\\validations\\files.ts": {
+    "mtime": 1784975815.736605,
+    "ast_hash": "7d3466ebab2c7553f21c035cdf95e30c",
+    "semantic_hash": "7d3466ebab2c7553f21c035cdf95e30c"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\schemas\\tsconfig.json": {
+    "mtime": 1784975815.736605,
+    "ast_hash": "e9e9a3c18debf1ae8a144b50fb97b9ef",
+    "semantic_hash": "e9e9a3c18debf1ae8a144b50fb97b9ef"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\components.json": {
+    "mtime": 1784975815.736605,
+    "ast_hash": "3288bd01dcfcecc398f8362b13a24277",
+    "semantic_hash": "3288bd01dcfcecc398f8362b13a24277"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\eslint.config.js": {
+    "mtime": 1784975815.7376058,
+    "ast_hash": "0355276bc79439afe3c53e3a2470ca1e",
+    "semantic_hash": "0355276bc79439afe3c53e3a2470ca1e"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\package.json": {
+    "mtime": 1784975815.7376058,
+    "ast_hash": "d538e30ea35b34b8c7996b00d75ad00a",
+    "semantic_hash": "d538e30ea35b34b8c7996b00d75ad00a"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\src\\components\\button.tsx": {
+    "mtime": 1784975815.7386098,
+    "ast_hash": "21d12514d82f5b2f75dd97d96eead77d",
+    "semantic_hash": "21d12514d82f5b2f75dd97d96eead77d"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\src\\components\\card.tsx": {
+    "mtime": 1784975815.7386098,
+    "ast_hash": "1fcb8b0e79196d8d44d4d36f61bcc680",
+    "semantic_hash": "1fcb8b0e79196d8d44d4d36f61bcc680"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\src\\components\\input.tsx": {
+    "mtime": 1784975815.7386098,
+    "ast_hash": "e2d3c11da1ee6082c29621b5f39efab3",
+    "semantic_hash": "e2d3c11da1ee6082c29621b5f39efab3"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\src\\components\\label.tsx": {
+    "mtime": 1784975815.7386098,
+    "ast_hash": "3f8221e1f52ea98b4d8b6da4d5b2d592",
+    "semantic_hash": "3f8221e1f52ea98b4d8b6da4d5b2d592"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\src\\lib\\utils.ts": {
+    "mtime": 1784975815.7396097,
+    "ast_hash": "5a6fd53fdcf2be529e9cc0b718fde352",
+    "semantic_hash": "5a6fd53fdcf2be529e9cc0b718fde352"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\tsconfig.json": {
+    "mtime": 1784975815.7408664,
+    "ast_hash": "07443803ccbfe85c518043eb8337a117",
+    "semantic_hash": "07443803ccbfe85c518043eb8337a117"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\ui\\tsconfig.lint.json": {
+    "mtime": 1784975815.7408664,
+    "ast_hash": "a358be449b7a8ed28ffff9e4b400bb24",
+    "semantic_hash": "a358be449b7a8ed28ffff9e4b400bb24"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\scripts\\postinstall.mjs": {
+    "mtime": 1784975815.7408664,
+    "ast_hash": "24b7de6e4a0d4d16b6bd99a6c7767f96",
+    "semantic_hash": "24b7de6e4a0d4d16b6bd99a6c7767f96"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\scripts\\setup.ps1": {
+    "mtime": 1784975815.741866,
+    "ast_hash": "ad5926a557c5555c06dd19c18989e216",
+    "semantic_hash": "ad5926a557c5555c06dd19c18989e216"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\scripts\\setup.sh": {
+    "mtime": 1784975815.741866,
+    "ast_hash": "5eba8d90a9a2119acb445f1a6180a6ce",
+    "semantic_hash": "5eba8d90a9a2119acb445f1a6180a6ce"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\tsconfig.json": {
+    "mtime": 1784975815.741866,
+    "ast_hash": "bf913fd1fa1eda06fff5164f8066f4a7",
+    "semantic_hash": "bf913fd1fa1eda06fff5164f8066f4a7"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\turbo.json": {
+    "mtime": 1784975815.741866,
+    "ast_hash": "907f83acf3abcccf689ec3d37e205f38",
+    "semantic_hash": "907f83acf3abcccf689ec3d37e205f38"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\vitest.config.ts": {
+    "mtime": 1784975815.7428658,
+    "ast_hash": "adc4916b6ac55f04813c5f17908de763",
+    "semantic_hash": "adc4916b6ac55f04813c5f17908de763"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\.github\\workflows\\ci.yml": {
+    "mtime": 1784975815.6290581,
+    "ast_hash": "15e4cb29ba696a4272e7a49a6b9e1f4c",
+    "semantic_hash": "15e4cb29ba696a4272e7a49a6b9e1f4c"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\.planning\\PROJECT.md": {
+    "mtime": 1784976364.7784073,
+    "ast_hash": "6113894beaa72a9ccc27f231e3b3d25b",
+    "semantic_hash": "6113894beaa72a9ccc27f231e3b3d25b"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\.planning\\REQUIREMENTS.md": {
+    "mtime": 1784976377.2495294,
+    "ast_hash": "1b61a50a37f4efdfe3d5d01bf7ed0338",
+    "semantic_hash": "1b61a50a37f4efdfe3d5d01bf7ed0338"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\.planning\\ROADMAP.md": {
+    "mtime": 1784976383.461757,
+    "ast_hash": "6bbb0e5d7f7dcfa3cc0d1b5e690fbdc4",
+    "semantic_hash": "6bbb0e5d7f7dcfa3cc0d1b5e690fbdc4"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\.planning\\STATE.md": {
+    "mtime": 1784976387.6399844,
+    "ast_hash": "9de98673778000c1af588a50105628d3",
+    "semantic_hash": "9de98673778000c1af588a50105628d3"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\AGENTS.md": {
+    "mtime": 1784975815.6322982,
+    "ast_hash": "2eee0db91499e2f164097787936584c4",
+    "semantic_hash": "2eee0db91499e2f164097787936584c4"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\README.md": {
+    "mtime": 1784976267.0941541,
+    "ast_hash": "a86e5e00c5896b83986d349c4569d623",
+    "semantic_hash": "a86e5e00c5896b83986d349c4569d623"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\apps\\web\\index.html": {
+    "mtime": 1784975815.6374638,
+    "ast_hash": "b24f7d96e7abb7718173a4857393a346",
+    "semantic_hash": "b24f7d96e7abb7718173a4857393a346"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\docker-compose.yml": {
+    "mtime": 1784975859.3809686,
+    "ast_hash": "02b70f3537e353cf7cc954c50c83ab78",
+    "semantic_hash": "02b70f3537e353cf7cc954c50c83ab78"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\infra\\terraform\\README.md": {
+    "mtime": 1784976241.3960586,
+    "ast_hash": "2926ace9451ad2cb476bf73cc8e383f6",
+    "semantic_hash": "2926ace9451ad2cb476bf73cc8e383f6"
+  },
+  "E:\\base-mono-repo\\mono-repo-simple\\packages\\files\\README.md": {
+    "mtime": 1784975815.7266047,
+    "ast_hash": "463e08899a2d9d56ee559ca681a7d4a0",
+    "semantic_hash": "463e08899a2d9d56ee559ca681a7d4a0"
   }
 }
