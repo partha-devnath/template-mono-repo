@@ -23,6 +23,8 @@ See: `.planning/PROJECT.md` (updated 2026-07-25)
 - Re-ran graphify on the current codebase (879 nodes, 1036 edges, 53 communities).
 - Fixed missing `@workspace/logger` dependency in `@workspace/auth`.
 - Verified `bun install`, `bun run build`, `bun run typecheck`, and `bun run test` all pass.
+- Fixed `apps/api/Dockerfile` and `apps/web/Dockerfile` build command syntax (`bun run --cwd <app> <script>`).
+- Built and pushed `template-mono-repo/api:latest` and `template-mono-repo/web:latest` to the floci ECR registry at `000000000000.dkr.ecr.us-east-1.localhost:5100`.
 
 ## Next Actions
 

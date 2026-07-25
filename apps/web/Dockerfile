@@ -16,7 +16,8 @@ WORKDIR /app
 # Copy the rest of the source code
 COPY . .
 
-RUN bun --cwd apps/web run build:docker
+RUN bun install
+RUN bun run --cwd apps/web build:docker
 
 # --- Stage 3: Runner ---
 FROM oven/bun:1-slim AS runner
