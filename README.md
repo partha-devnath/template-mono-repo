@@ -14,7 +14,8 @@ Production-ready full-stack monorepo template using **Bun**, **Vite**, **React**
 | Forms         | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev)                       |
 | Data Fetching | [TanStack React Query](https://tanstack.com/query)                                            |
 | State         | [Zustand](https://zustand-demo.pmnd.rs)                                                       |
-| Logging       | [Pino](https://getpino.io)                                                                    |
+| Logging       | [Winston](https://github.com/winstonjs/winston) (server) + styled console (browser)          |
+| Storage       | [MinIO](https://min.io) / S3-compatible adapter (`@workspace/files`)                          |
 | Monorepo      | [Turborepo](https://turbo.build/repo)                                                         |
 | Styling       | [Tailwind CSS v4](https://tailwindcss.com)                                                    |
 
@@ -44,8 +45,9 @@ Production-ready full-stack monorepo template using **Bun**, **Vite**, **React**
 │   ├── db/               Drizzle client + migration runner
 │   ├── auth/             Better Auth server instance
 │   ├── email/            Email sender (console in dev, pluggable)
-│   └── logger/           Pino structured logger
-├── docker-compose.yml    PostgreSQL + API + web services
+│   ├── logger/           Winston structured logger
+│   └── files/            S3-compatible storage adapter + upload helper
+├── docker-compose.yml    PostgreSQL + API + web + MinIO services
 ├── apps/api/Dockerfile   API multi-stage build
 ├── .dockerignore
 ├── turbo.json
@@ -469,7 +471,7 @@ Serve the frontend from any static file server or use Hono's `serveStatic` in pr
 | `BETTER_AUTH_URL`    | ✅       | Public URL of API server                               |
 | `CLIENT_URL`         | ✅       | Frontend URL (for CORS)                                |
 | `PORT`               |          | API server port (default 3001)                         |
-| `LOG_LEVEL`          |          | Pino log level (default "info")                        |
+| `LOG_LEVEL`          |          | Winston log level (default "info")                     |
 | `EMAIL_PROVIDER`     |          | "console" \| "mailpit" \| "resend" (default "mailpit") |
 | `VITE_API_URL`       | ✅       | API URL for frontend client                            |
 
@@ -518,5 +520,5 @@ Serve the frontend from any static file server or use Hono's `serveStatic` in pr
 
 - [Bun](https://bun.sh/docs)
 - [Turborepo](https://turbo.build/repo/docs)
-- [Pino](https://getpino.io/#/docs)
+- [Winston](https://github.com/winstonjs/winston)
 - [Docker](https://docs.docker.com)
