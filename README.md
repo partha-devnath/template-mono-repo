@@ -16,6 +16,7 @@ Production-ready full-stack monorepo template using **Bun**, **Vite**, **React**
 | State         | [Zustand](https://zustand-demo.pmnd.rs)                                                       |
 | Logging       | [Winston](https://github.com/winstonjs/winston) (server) + styled console (browser)           |
 | Storage       | S3-compatible adapter via `@workspace/files` (floci S3 / AWS S3 / LocalStack)                 |
+| AWS Mock      | [floci](https://floci.dev) — local AWS services (ECR, S3, IAM, EC2, etc.)                     |
 | Monorepo      | [Turborepo](https://turbo.build/repo)                                                         |
 | Styling       | [Tailwind CSS v4](https://tailwindcss.com)                                                    |
 
@@ -47,9 +48,8 @@ Production-ready full-stack monorepo template using **Bun**, **Vite**, **React**
 │   ├── email/            Email sender (console in dev, pluggable)
 │   ├── logger/           Winston structured logger
 │   └── files/            S3-compatible storage adapter + upload helper
-├── docker-compose.yml    PostgreSQL + API + web services
+├── docker-compose.yml    PostgreSQL + API + web services + mailpit
 ├── apps/api/Dockerfile   API multi-stage build
-├── infra/terraform/      AWS infrastructure (ECR, EKS, ALB)
 ├── .dockerignore
 ├── turbo.json
 └── package.json
@@ -94,6 +94,7 @@ This starts:
 - **Frontend** → http://localhost:5173
 - **API** → http://localhost:3001
 - **Mailpit** → http://localhost:8025
+- AWS services (S3, ECR, IAM, etc.) are provided by **floci** at `http://localhost:4566`
 
 ### Available commands
 
@@ -309,14 +310,14 @@ Swap `Resend` for any provider (SendGrid, Postmark, SES, etc.). Implement the `E
 
 ### Environment variables for email
 
-| Variable            | Values                                   | Default                 | Notes                                 |
-| ------------------- | ---------------------------------------- | ----------------------- | ------------------------------------- |
-| `EMAIL_PROVIDER`    | `"console"` \| `"mailpit"` \| `"resend"` | `"mailpit"`             | Selects the email sender              |
-| `MAILPIT_HOST`      |                                          | `"localhost"`           | SMTP host when using mailpit          |
-| `MAILPIT_SMTP_PORT` |                                          | `1025`                  | SMTP port when using mailpit          |
-| `EMAIL_FROM`        |                                          | `"noreply@localhost"`   | From address for sent emails          |
-| `RESEND_API_KEY`    | `re_...`                                 | —                       | Required when `EMAIL_PROVIDER=resend` |
-| `BETTER_AUTH_URL`   | URL                                      | `http://localhost:3001` | Base URL used in email links          |
+| Variable            | Values                                   | Default                          | Notes                                 |
+| ------------------- | ---------------------------------------- | -------------------------------- | ------------------------------------- |
+| `EMAIL_PROVIDER`    | `"console"` \| `"mailpit"` \| `"resend"` | `"mailpit"`                      | Selects the email sender              |
+| `MAILPIT_HOST`      |                                          | `"localhost"`                    | SMTP host when using mailpit          |
+| `MAILPIT_SMTP_PORT` |                                          | `1025`                           | SMTP port when using mailpit          |
+| `EMAIL_FROM`        |                                          | `"noreply@localhost"`            | From address for sent emails          |
+| `RESEND_API_KEY`    | `re_...`                                 | —                                | Required when `EMAIL_PROVIDER=resend` |
+| `BETTER_AUTH_URL`   | URL                                      | `http://localhost:3001/api/auth` | Base URL used in email links          |
 
 ## S3 / File Storage Setup
 
@@ -334,17 +335,11 @@ S3_BUCKET=template
 # S3_BASE_URL=https://cdn.mydomain.com             # optional CDN/public URL
 ```
 
-The API uses IAM credentials from the environment when running in EKS. For local development, export the floci profile credentials or set them directly in `.env`.
-
-### Local S3-compatible endpoint
-
-For local development against LocalStack or a similar service, set the endpoint:
+For local development against **floci** (the local AWS mock), set the endpoint:
 
 ```env
 S3_ENDPOINT=http://localhost:4566
 S3_REGION=us-east-1
-S3_ACCESS_KEY_ID=test
-S3_SECRET_ACCESS_KEY=test
 S3_BUCKET=template
 ```
 
@@ -426,9 +421,9 @@ Then add the table to `packages/schemas/src/index.ts` exports.
 
 ## Deployment
 
-### Docker (local)
+### Docker Compose (local)
 
-The repo includes a full Docker Compose setup for local deployment:
+All services run via Docker Compose:
 
 ```bash
 # Build and start all services
@@ -438,7 +433,7 @@ docker compose up --build
 docker compose up --build -d
 
 # Run migrations
-docker compose exec api bun run dist/index.js --migrate
+docker compose exec api bun run dist/index.js
 
 # Stop
 docker compose down
@@ -446,30 +441,12 @@ docker compose down
 
 Services:
 
-- **web** → http://localhost:5173 (Nginx serving Vite build, proxies `/api/` to backend)
+- **web** → http://localhost:5173 (Vite static build served by `bun x serve`)
 - **api** → http://localhost:3001 (Hono/Bun, compiled with `--target bun`)
 - **postgres** → localhost:5432
 - **mailpit** → http://localhost:8025 (SMTP on 1025, web UI on 8025)
 
-### AWS (EKS)
-
-Production infrastructure is provisioned with Terraform in `infra/terraform/`:
-
-```bash
-cd infra/terraform/environments/floci
-terraform init
-terraform plan
-terraform apply
-```
-
-The Terraform modules create:
-
-- **ECR** repositories for `api` and `web` container images.
-- **VPC** with public and private subnets across three AZs.
-- **EKS** cluster with managed node groups.
-- **Application Gateway (ALB)** with path-based routing (`/api/*` → API, `/*` → web).
-
-See `infra/terraform/README.md` for details and required variables.
+AWS services (ECR, S3, IAM, etc.) are provided by **floci** running at `http://localhost:4566`.
 
 ### Manual build
 
